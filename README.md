@@ -26,7 +26,8 @@ Least coding ,support config CRUD admin integration solution based on Element UI
 - Error Page
   - 401
   - 404
-  
+```
+
 ## Getting started
 
 ```bash
@@ -46,4 +47,11 @@ This will automatically open http://localhost:9001.
 ```bash
 # build for production environment
 npm run build
+```
+## Run
+```bash
+# Run for development environment
+npm run dev
+# Run for production environment
+npm run pm2
 ```
