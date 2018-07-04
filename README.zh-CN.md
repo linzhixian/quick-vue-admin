@@ -53,7 +53,7 @@ git clone https://github.com/linzhixian/quick-vue-admin.git
 npm install
 
 # 设置MongoDB的连接参数
-  打开：[HOME]/config/development.js
+  修改文件：[HOME]/config/development.js
               mongodb_url: { //数据库地址
                  "host": "127.0.0.1",
                   "port": 27017,
@@ -65,6 +65,7 @@ npm run dev
 ```
 
 启动浏览器打开地址： http://localhost:9001.
+默认登录帐号：用户名:root ,密码:root
 
 ## 构建
 ```bash
