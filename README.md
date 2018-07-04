@@ -1,11 +1,13 @@
 # quick-vue-admin
-Least coding ,support config CRUD admin integration solution based on Element UI 2.x with MongoDB
+Least coding ,support config CRUD admin integration solution based on Element UI 2.x with MongoDB.
+
 
 # Live Demo:
  https://linzhixian.github.io/element-vue-admin
  
 ## Dependencies
 - nodejs
+- koa 2.0.0
 - Element UI 2.x
 - MongoDB 3.x
 
