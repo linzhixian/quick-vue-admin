@@ -6,10 +6,10 @@ Least coding ,support config CRUD admin integration solution based on Element UI
  https://linzhixian.github.io/element-vue-admin
  
 ## Dependencies
-- nodejs       (need stand alone install)
-- koa 2.0.0 ()  (include)
-- Element UI 2.x (include)
-- MongoDB 3.x (need stand alone install)
+- nodejs                 (need stand alone install)
+- koa 2.0.0 ()           (include)
+- Element UI 2.x         (include)
+- MongoDB 3.x            (need stand alone install)
 
 ## Features
 ```
