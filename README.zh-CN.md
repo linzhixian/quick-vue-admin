@@ -54,14 +54,12 @@ npm install
 
 # 设置MongoDB的连接参数
   打开：[HOME]/config/development.js
-  ```
    mongodb_url: { //数据库地址
-        "host": "192.168.1.20",
+        "host": "127.0.0.1",
         "port": 27017,
         "dbname": "tcAd",
         "poolSize": 1
     }
-  ```
 # 启动服务
 npm run dev
 ```
