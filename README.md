@@ -1,5 +1,5 @@
 <p align="center">
-  quick-vue-admin
+  <h1>quick-vue-admin</h1>
 </p>
 
 English | [简体中文](./README.zh-CN.md)
