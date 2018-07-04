@@ -1,6 +1,10 @@
+<p align="center">
+  quick-vue-admin
+</p>
+
 English | [简体中文](./README.zh-CN.md)
 
-# quick-vue-admin
+# Introduction
 
 Least coding ,support config CRUD admin integration solution based on Element UI 2.x with MongoDB.
 
