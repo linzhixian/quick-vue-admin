@@ -65,7 +65,7 @@ npm run dev
 ```
 
 启动浏览器打开地址： http://localhost:9001.
-默认登录帐号：用户名:root ,密码:root
+默认登录帐号：用户名:admin ,密码:admin
 
 ## 构建
 ```bash
