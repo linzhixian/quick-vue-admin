@@ -43,7 +43,7 @@ npm install
 npm run dev
 ```
 
-This will automatically open http://localhost:9001.
+Open browser on： http://localhost:9001.
 
 ## Build
 ```bash
@@ -57,3 +57,9 @@ npm run dev
 # Run for production environment
 npm run pm2
 ```
+
+## License
+
+[MIT](https://github.com/linzhixian/quick-vue-admin/blob/master/LICENSE)
+
+Copyright (c) 2018-present ZhiXianLin
