@@ -41,7 +41,7 @@
 ## 准备
 
 # 安装好本地nodejs环境
-# 本地或远程安装MongoDB
+# 本地或远程安装MongoDB:默认端口：27017
 
 ## 开始
 
@@ -54,12 +54,12 @@ npm install
 
 # 设置MongoDB的连接参数
   打开：[HOME]/config/development.js
-   mongodb_url: { //数据库地址
-        "host": "127.0.0.1",
-        "port": 27017,
-        "dbname": "tcAd",
-        "poolSize": 1
-    }
+              mongodb_url: { //数据库地址
+                 "host": "127.0.0.1",
+                  "port": 27017,
+                  "dbname": "quickadmin",
+                  "poolSize": 1
+                }
 # 启动服务
 npm run dev
 ```
