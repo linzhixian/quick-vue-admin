@@ -38,6 +38,11 @@
   - 404
 ```
 
+## 准备
+
+# 安装好本地nodejs环境
+# 本地或远程安装MongoDB
+
 ## 开始
 
 ```bash
@@ -47,6 +52,16 @@ git clone https://github.com/linzhixian/quick-vue-admin.git
 # 安装依赖
 npm install
 
+# 设置MongoDB的连接参数
+  打开：[HOME]/config/development.js
+  ```
+   mongodb_url: { //数据库地址
+        "host": "192.168.1.20",
+        "port": 27017,
+        "dbname": "tcAd",
+        "poolSize": 1
+    }
+  ```
 # 启动服务
 npm run dev
 ```
