@@ -26,3 +26,24 @@ Least coding ,support config CRUD admin integration solution based on Element UI
 - Error Page
   - 401
   - 404
+
+## Getting started
+
+```bash
+# clone the project
+git clone https://github.com/linzhixian/quick-vue-admin.git
+
+# install dependency
+npm install
+
+# develop
+npm run dev
+```
+
+This will automatically open http://localhost:9001.
+
+## Build
+```bash
+# build for production environment
+npm run build
+```
