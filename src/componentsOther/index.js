@@ -1,0 +1,6 @@
+
+
+exports.load = function(Vue) {
+
+    
+}
