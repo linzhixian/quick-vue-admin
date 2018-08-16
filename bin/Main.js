@@ -4,18 +4,18 @@
  * Module dependencies.
  */
 require('babel-register');
-var app = require('../app');
+var app = require('../src/server/app');
 var debug = require('debug')('demo:server');
 var http = require('http');
 
 //引入配置文件
-var config = require('../config');
+var config = require('../config/server');
 
 console.log("process.env.NODE_ENV=" + process.env.NODE_ENV);
 
 
 var fs = require('fs');
-var logConfig = require('../config/log_config');
+var logConfig = require('../config/server/log_config');
 
 /**
  * 确定目录是否存在，如果不存在则创建目录
@@ -61,16 +61,21 @@ console.log('port = ' + config.port);
 /**
  * Create HTTP server.
  */
+console.log(app)
 
-var server = http.createServer(app.callback());
 
-/**
- * Listen on provided port, on all network interfaces.
- */
+app.init().then((callback)=>{
+    console.log("---------ceateServer")
+    let server = http.createServer(callback);
+    /**
+     * Listen on provided port, on all network interfaces.
+     */
+    server.listen(port);
+    server.on('error', onError);
+    server.on('listening', onListening);
+})
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+
 
 /**
  * Normalize a port into a number, string, or false.

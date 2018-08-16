@@ -1,0 +1,308 @@
+[2018-08-08 16:01:58.600] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: undefined
+request originalUrl:  /api/admin/logout
+request client ip:  ::1
+request body: 
+{}
+response time: 3
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"}}
+*************** response log end ***************
+
+[2018-08-08 16:01:59.582] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/login
+request client ip:  ::1
+request body: 
+{"username":"admin","password":"admin"}
+response time: 5
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"user":{"_id":"1","username":"admin","password":null,"type":"root","right":{}}}}
+*************** response log end ***************
+
+[2018-08-08 16:01:59.733] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/x-www-form-urlencoded
+request originalUrl:  /api/admin[object%20Object]//sys/Role
+request client ip:  ::1
+request body: 
+{"list":""}
+response time: 0
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"}}
+*************** response log end ***************
+
+[2018-08-08 16:01:59.741] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/x-www-form-urlencoded
+request originalUrl:  /api/admin[object%20Object]//sys/User
+request client ip:  ::1
+request body: 
+{"listpage":""}
+response time: 0
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"}}
+*************** response log end ***************
+
+[2018-08-08 18:17:24.292] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/login
+request client ip:  ::1
+request body: 
+{"username":"admin","password":"admin"}
+response time: 9
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"user":{"_id":"1","username":"admin","password":null,"type":"root","right":{}}}}
+*************** response log end ***************
+
+[2018-08-08 18:17:24.459] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/sys/Role/list
+request client ip:  ::1
+request body: 
+{"filter":{}}
+response time: 7
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":[]}
+*************** response log end ***************
+
+[2018-08-08 18:17:24.499] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/sys/User/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 33
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"records":[{"_id":"1","username":"admin","password":"admin","type":"root"}],"total":1}}
+*************** response log end ***************
+
+[2018-08-08 18:17:29.910] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/company/Department/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 25
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"records":[{"_id":"6","name":"人力资源部b","memo":"ss","min":"1","max":"22","config":{"min":"1","max":"22"}}],"total":1}}
+*************** response log end ***************
+
+[2018-08-08 18:17:35.300] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/company/Department/add
+request client ip:  ::1
+request body: 
+{"name":"test","memo":"1","addTime":"2018-08-08 18:17:35","_id":"7"}
+response time: 19
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"}}
+*************** response log end ***************
+
+[2018-08-08 18:17:35.334] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/company/Department/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 9
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"records":[{"_id":"6","name":"人力资源部b","memo":"ss","min":"1","max":"22","config":{"min":"1","max":"22"}},{"_id":"7","name":"test","memo":"1","addTime":"2018-08-08 18:17:35"}],"total":2}}
+*************** response log end ***************
+
+[2018-08-08 18:17:38.407] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/company/Department/edit
+request client ip:  ::1
+request body: 
+{"name":"test","memo":"xx","_id":"7"}
+response time: 9
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"}}
+*************** response log end ***************
+
+[2018-08-08 18:17:38.448] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/company/Department/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 16
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"records":[{"_id":"6","name":"人力资源部b","memo":"ss","min":"1","max":"22","config":{"min":"1","max":"22"}},{"_id":"7","name":"test","memo":"xx","addTime":"2018-08-08 18:17:35"}],"total":2}}
+*************** response log end ***************
+
+[2018-08-08 20:07:42.754] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/login
+request client ip:  ::1
+request body: 
+{"username":"admin","password":"admin"}
+response time: 9
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"user":{"_id":"1","username":"admin","password":null,"type":"root","right":{}}}}
+*************** response log end ***************
+
+[2018-08-08 20:07:42.920] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/sys/Role/list
+request client ip:  ::1
+request body: 
+{"filter":{}}
+response time: 19
+response status: 200
+response body: 
+{"status":{"code":"unknow","msg":"ReferenceError:R is not defined"}}
+*************** response log end ***************
+
+[2018-08-08 20:07:42.935] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/sys/User/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 7
+response status: 200
+response body: 
+{"status":{"code":"unknow","msg":"ReferenceError:R is not defined"}}
+*************** response log end ***************
+
+[2018-08-08 20:07:46.765] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/example/Input/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 9
+response status: 200
+response body: 
+{"status":{"code":"unknow","msg":"ReferenceError:R is not defined"}}
+*************** response log end ***************
+
+[2018-08-08 20:08:15.030] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/example/Input/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 16
+response status: 200
+response body: 
+{"status":{"code":"unknow","msg":"ReferenceError:filter is not defined"}}
+*************** response log end ***************
+
+[2018-08-08 20:09:01.378] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/example/Input/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 35
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"records":[{"_id":"1","text":"文本框","textarea":"多行","select":"色色","select_ajax":"6","radioGroup":"禁用","checkbox":true,"checkboxGroup":["深圳","广州"],"date":"20180724","time":"2018-07-27T04:59:52.000Z","datetime":"2018-07-13T16:00:00.000Z","daterange":["2018-07-25T16:00:00.000Z","2018-08-29T16:00:00.000Z"],"datetimerange":["2018-07-02T16:00:00.000Z","2018-08-29T16:00:00.000Z"]},{"_id":"2","text":"a","textarea":"b","select":"黄色","select_ajax":"6","radioGroup":"禁用","checkbox":"true","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727151819638.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727151819638.txt","srcName":"error.txt"}},{"_id":"3","text":"s","textarea":"b","select":"色色","select_ajax":"","radioGroup":"false","checkbox":"","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727152302667.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727152302667.txt","srcName":"error.txt"}},{"_id":"4","text":"s","textarea":"ss","select":"色色","select_ajax":"6","radioGroup":"true","checkbox":"true","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727154547196.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727154547196.txt","srcName":"error.txt"}},{"_id":"13","text":"ss","textarea":"ss","select":"色色","select_ajax":"6","radioGroup":false,"checkbox":true,"checkboxGroup":["广州","深圳"],"date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":"","tree":["北京市","天津市"],"addTime":"2018-08-02 10:27:54"}],"total":5}}
+*************** response log end ***************
+
+[2018-08-08 20:09:04.424] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/company/Department/list
+request client ip:  ::1
+request body: 
+{"projects":{"_id":1,"name":1}}
+response time: 14
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":[{"_id":"6","name":"人力资源部b"},{"_id":"7","name":"test"}]}
+*************** response log end ***************
+
+[2018-08-08 20:09:06.986] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/company/Department/list
+request client ip:  ::1
+request body: 
+{"projects":{"_id":1,"name":1}}
+response time: 7
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":[{"_id":"6","name":"人力资源部b"},{"_id":"7","name":"test"}]}
+*************** response log end ***************
+
+[2018-08-08 20:12:24.970] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/example/Input/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 126
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"records":[{"_id":"1","text":"文本框","textarea":"多行","select":"色色","select_ajax":"6","radioGroup":"禁用","checkbox":true,"checkboxGroup":["深圳","广州"],"date":"20180724","time":"2018-07-27T04:59:52.000Z","datetime":"2018-07-13T16:00:00.000Z","daterange":["2018-07-25T16:00:00.000Z","2018-08-29T16:00:00.000Z"],"datetimerange":["2018-07-02T16:00:00.000Z","2018-08-29T16:00:00.000Z"]},{"_id":"2","text":"a","textarea":"b","select":"黄色","select_ajax":"6","radioGroup":"禁用","checkbox":"true","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727151819638.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727151819638.txt","srcName":"error.txt"}},{"_id":"3","text":"s","textarea":"b","select":"色色","select_ajax":"","radioGroup":"false","checkbox":"","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727152302667.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727152302667.txt","srcName":"error.txt"}},{"_id":"4","text":"s","textarea":"ss","select":"色色","select_ajax":"6","radioGroup":"true","checkbox":"true","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727154547196.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727154547196.txt","srcName":"error.txt"}},{"_id":"13","text":"ss","textarea":"ss","select":"色色","select_ajax":"6","radioGroup":false,"checkbox":true,"checkboxGroup":["广州","深圳"],"date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":"","tree":["北京市","天津市"],"addTime":"2018-08-02 10:27:54"}],"total":5}}
+*************** response log end ***************
+
+[2018-08-08 20:12:26.775] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/company/Department/list
+request client ip:  ::1
+request body: 
+{"projects":{"_id":1,"name":1}}
+response time: 8
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":[{"_id":"6","name":"人力资源部b"},{"_id":"7","name":"test"}]}
+*************** response log end ***************
+

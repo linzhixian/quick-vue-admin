@@ -1,0 +1,280 @@
+[2018-08-02 10:27:29.116] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: undefined
+request originalUrl:  /api/admin/logout
+request client ip:  ::1
+request body: 
+{}
+response time: 4
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"}}
+*************** response log end ***************
+
+[2018-08-02 10:27:29.954] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/login
+request client ip:  ::1
+request body: 
+{"username":"admin","password":"admin"}
+response time: 4
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"user":{"_id":"1","username":"admin","password":null,"type":"root","right":{}}}}
+*************** response log end ***************
+
+[2018-08-02 10:27:30.075] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/sys/Role/list
+request client ip:  ::1
+request body: 
+{"filter":{}}
+response time: 8
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":[]}
+*************** response log end ***************
+
+[2018-08-02 10:27:30.093] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/sys/User/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 10
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"records":[{"_id":"1","username":"admin","password":"admin","type":"root"}],"total":1}}
+*************** response log end ***************
+
+[2018-08-02 10:27:32.878] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/company/Department/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 15
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"records":[{"_id":"6","name":"人力资源部b","memo":"ss"}],"total":1}}
+*************** response log end ***************
+
+[2018-08-02 10:27:34.946] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/example/Input/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 8
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"records":[{"_id":"1","text":"文本框","textarea":"多行","select":"色色","select_ajax":"6","radioGroup":"禁用","checkbox":true,"checkboxGroup":["深圳","广州"],"date":"20180724","time":"2018-07-27T04:59:52.000Z","datetime":"2018-07-13T16:00:00.000Z","daterange":["2018-07-25T16:00:00.000Z","2018-08-29T16:00:00.000Z"],"datetimerange":["2018-07-02T16:00:00.000Z","2018-08-29T16:00:00.000Z"]},{"_id":"2","text":"a","textarea":"b","select":"黄色","select_ajax":"6","radioGroup":"禁用","checkbox":"true","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727151819638.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727151819638.txt","srcName":"error.txt"}},{"_id":"3","text":"s","textarea":"b","select":"色色","select_ajax":"","radioGroup":"false","checkbox":"","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727152302667.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727152302667.txt","srcName":"error.txt"}},{"_id":"4","text":"s","textarea":"ss","select":"色色","select_ajax":"6","radioGroup":"true","checkbox":"true","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727154547196.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727154547196.txt","srcName":"error.txt"}}],"total":4}}
+*************** response log end ***************
+
+[2018-08-02 10:27:35.957] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/company/Department/list
+request client ip:  ::1
+request body: 
+{"projects":{"_id":1,"name":1}}
+response time: 6
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":[{"_id":"6","name":"人力资源部b"}]}
+*************** response log end ***************
+
+[2018-08-02 10:27:54.971] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/example/Input/add
+request client ip:  ::1
+request body: 
+{"text":"ss","textarea":"ss","select":"色色","select_ajax":"6","radioGroup":false,"checkbox":true,"checkboxGroup":["广州","深圳"],"date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":"","tree":["北京市","天津市"],"addTime":"2018-08-02 10:27:54","_id":"13"}
+response time: 31
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"}}
+*************** response log end ***************
+
+[2018-08-02 10:27:55.048] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/example/Input/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 14
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"records":[{"_id":"1","text":"文本框","textarea":"多行","select":"色色","select_ajax":"6","radioGroup":"禁用","checkbox":true,"checkboxGroup":["深圳","广州"],"date":"20180724","time":"2018-07-27T04:59:52.000Z","datetime":"2018-07-13T16:00:00.000Z","daterange":["2018-07-25T16:00:00.000Z","2018-08-29T16:00:00.000Z"],"datetimerange":["2018-07-02T16:00:00.000Z","2018-08-29T16:00:00.000Z"]},{"_id":"2","text":"a","textarea":"b","select":"黄色","select_ajax":"6","radioGroup":"禁用","checkbox":"true","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727151819638.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727151819638.txt","srcName":"error.txt"}},{"_id":"3","text":"s","textarea":"b","select":"色色","select_ajax":"","radioGroup":"false","checkbox":"","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727152302667.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727152302667.txt","srcName":"error.txt"}},{"_id":"4","text":"s","textarea":"ss","select":"色色","select_ajax":"6","radioGroup":"true","checkbox":"true","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727154547196.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727154547196.txt","srcName":"error.txt"}},{"_id":"13","text":"ss","textarea":"ss","select":"色色","select_ajax":"6","radioGroup":false,"checkbox":true,"checkboxGroup":["广州","深圳"],"date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":"","tree":["北京市","天津市"],"addTime":"2018-08-02 10:27:54"}],"total":5}}
+*************** response log end ***************
+
+[2018-08-02 10:28:47.337] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/example/Input/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 20
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"records":[{"_id":"1","text":"文本框","textarea":"多行","select":"色色","select_ajax":"6","radioGroup":"禁用","checkbox":true,"checkboxGroup":["深圳","广州"],"date":"20180724","time":"2018-07-27T04:59:52.000Z","datetime":"2018-07-13T16:00:00.000Z","daterange":["2018-07-25T16:00:00.000Z","2018-08-29T16:00:00.000Z"],"datetimerange":["2018-07-02T16:00:00.000Z","2018-08-29T16:00:00.000Z"]},{"_id":"2","text":"a","textarea":"b","select":"黄色","select_ajax":"6","radioGroup":"禁用","checkbox":"true","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727151819638.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727151819638.txt","srcName":"error.txt"}},{"_id":"3","text":"s","textarea":"b","select":"色色","select_ajax":"","radioGroup":"false","checkbox":"","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727152302667.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727152302667.txt","srcName":"error.txt"}},{"_id":"4","text":"s","textarea":"ss","select":"色色","select_ajax":"6","radioGroup":"true","checkbox":"true","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727154547196.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727154547196.txt","srcName":"error.txt"}},{"_id":"13","text":"ss","textarea":"ss","select":"色色","select_ajax":"6","radioGroup":false,"checkbox":true,"checkboxGroup":["广州","深圳"],"date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":"","tree":["北京市","天津市"],"addTime":"2018-08-02 10:27:54"}],"total":5}}
+*************** response log end ***************
+
+[2018-08-02 10:38:29.405] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/company/Department/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 8
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"records":[{"_id":"6","name":"人力资源部b","memo":"ss"}],"total":1}}
+*************** response log end ***************
+
+[2018-08-02 11:17:33.204] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: undefined
+request originalUrl:  /api/admin/logout
+request client ip:  ::1
+request body: 
+{}
+response time: 1
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"}}
+*************** response log end ***************
+
+[2018-08-02 11:17:34.041] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/login
+request client ip:  ::1
+request body: 
+{"username":"admin","password":"admin"}
+response time: 4
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"user":{"_id":"1","username":"admin","password":null,"type":"root","right":{}}}}
+*************** response log end ***************
+
+[2018-08-02 11:17:34.163] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/sys/Role/list
+request client ip:  ::1
+request body: 
+{"filter":{}}
+response time: 13
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":[]}
+*************** response log end ***************
+
+[2018-08-02 11:17:34.170] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/sys/User/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 12
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"records":[{"_id":"1","username":"admin","password":"admin","type":"root"}],"total":1}}
+*************** response log end ***************
+
+[2018-08-02 11:17:36.265] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/example/Input/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 26
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"records":[{"_id":"1","text":"文本框","textarea":"多行","select":"色色","select_ajax":"6","radioGroup":"禁用","checkbox":true,"checkboxGroup":["深圳","广州"],"date":"20180724","time":"2018-07-27T04:59:52.000Z","datetime":"2018-07-13T16:00:00.000Z","daterange":["2018-07-25T16:00:00.000Z","2018-08-29T16:00:00.000Z"],"datetimerange":["2018-07-02T16:00:00.000Z","2018-08-29T16:00:00.000Z"]},{"_id":"2","text":"a","textarea":"b","select":"黄色","select_ajax":"6","radioGroup":"禁用","checkbox":"true","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727151819638.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727151819638.txt","srcName":"error.txt"}},{"_id":"3","text":"s","textarea":"b","select":"色色","select_ajax":"","radioGroup":"false","checkbox":"","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727152302667.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727152302667.txt","srcName":"error.txt"}},{"_id":"4","text":"s","textarea":"ss","select":"色色","select_ajax":"6","radioGroup":"true","checkbox":"true","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727154547196.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727154547196.txt","srcName":"error.txt"}},{"_id":"13","text":"ss","textarea":"ss","select":"色色","select_ajax":"6","radioGroup":false,"checkbox":true,"checkboxGroup":["广州","深圳"],"date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":"","tree":["北京市","天津市"],"addTime":"2018-08-02 10:27:54"}],"total":5}}
+*************** response log end ***************
+
+[2018-08-02 11:45:04.961] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/example/Input/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 31
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"records":[{"_id":"1","text":"文本框","textarea":"多行","select":"色色","select_ajax":"6","radioGroup":"禁用","checkbox":true,"checkboxGroup":["深圳","广州"],"date":"20180724","time":"2018-07-27T04:59:52.000Z","datetime":"2018-07-13T16:00:00.000Z","daterange":["2018-07-25T16:00:00.000Z","2018-08-29T16:00:00.000Z"],"datetimerange":["2018-07-02T16:00:00.000Z","2018-08-29T16:00:00.000Z"]},{"_id":"2","text":"a","textarea":"b","select":"黄色","select_ajax":"6","radioGroup":"禁用","checkbox":"true","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727151819638.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727151819638.txt","srcName":"error.txt"}},{"_id":"3","text":"s","textarea":"b","select":"色色","select_ajax":"","radioGroup":"false","checkbox":"","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727152302667.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727152302667.txt","srcName":"error.txt"}},{"_id":"4","text":"s","textarea":"ss","select":"色色","select_ajax":"6","radioGroup":"true","checkbox":"true","date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":{"path":"example\\20180727154547196.txt","md5":"54a034b827f4ea3549375544e341b0fc","size":"49150","name":"20180727154547196.txt","srcName":"error.txt"}},{"_id":"13","text":"ss","textarea":"ss","select":"色色","select_ajax":"6","radioGroup":false,"checkbox":true,"checkboxGroup":["广州","深圳"],"date":"","time":"","datetime":"","daterange":"","datetimerange":"","fileInfo":"","tree":["北京市","天津市"],"addTime":"2018-08-02 10:27:54"}],"total":5}}
+*************** response log end ***************
+
+[2018-08-02 11:45:07.223] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/company/Department/list
+request client ip:  ::1
+request body: 
+{"projects":{"_id":1,"name":1}}
+response time: 10
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":[{"_id":"6","name":"人力资源部b"}]}
+*************** response log end ***************
+
+[2018-08-02 11:45:13.279] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/company/Department/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 9
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"records":[{"_id":"6","name":"人力资源部b","memo":"ss"}],"total":1}}
+*************** response log end ***************
+
+[2018-08-02 11:47:29.151] [INFO] androidTouchadmin.resLogger - 
+*************** response log start ***************
+request method: POST
+request conentType: application/json;charset=UTF-8
+request originalUrl:  /api/admin/company/Department/listpage
+request client ip:  ::1
+request body: 
+{"page":1,"pageSize":20,"filter":{}}
+response time: 26
+response status: 200
+response body: 
+{"status":{"code":"0","msg":"success"},"data":{"records":[{"_id":"6","name":"人力资源部b","memo":"ss"}],"total":1}}
+*************** response log end ***************
+
