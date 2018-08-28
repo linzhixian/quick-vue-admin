@@ -71,7 +71,7 @@ npm run pm2
 If you find this project useful, you can buy author a glass of juice
 
 
-![](https://linzhixian.github.io/quick-vue-admin-document/hero.jpg)
+![](https://linzhixian.github.io/quick-vue-admin-document/wechatAndAlipay.jpg)
 
 ## License
 
