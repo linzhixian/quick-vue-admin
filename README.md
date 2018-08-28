@@ -66,6 +66,13 @@ npm run pm2
 ## Changelog
   Detailed changes for each release are documented in the [release notes](https://github.com/linzhixian/quick-vue-admin/releases).
 
+## Donate
+
+If you find this project useful, you can buy author a glass of juice
+
+
+![](https://linzhixian.github.io/quick-vue-admin-document/hero.jpg)
+
 ## License
 
 [MIT](https://github.com/linzhixian/quick-vue-admin/blob/master/LICENSE)
