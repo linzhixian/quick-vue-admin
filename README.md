@@ -12,13 +12,13 @@ quick-vue-admi是一个开箱即用的后台集成解决方案，它基于[Vue](
   
  - [讨论组](https://gitter.im/quick-vue-admin/discuss)
 
-## Dependencies
+## 依赖
 - nodejs &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(need stand alone install)
 - koa 2.0.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(include)
 - Element UI 2.x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(include)
 - MongoDB 3.x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(need stand alone install)
 
-## Features
+## 特性
 ```
 - Login / Logout
 
@@ -30,8 +30,7 @@ quick-vue-admi是一个开箱即用的后台集成解决方案，它基于[Vue](
   - through create one meta config file to auto generate CRUD page
   - auto create collection in MongoDB
   - auto create index in MongoDB
- 
-
+- Auto ref
 - Error Page
   - 401
   - 404
@@ -64,6 +63,8 @@ npm run dev
 # Run for production environment
 npm run pm2
 ```
+## Changelog
+  Detailed changes for each release are documented in the [release notes](https://github.com/linzhixian/quick-vue-admin/releases).
 
 ## License
 
