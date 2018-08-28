@@ -4,13 +4,13 @@
 
 English | [简体中文](./README.zh-CN.md)
 
-# Introduction
+# 介绍
 
-Least coding ,support config CRUD admin integration solution based on Element UI 2.x with MongoDB.
+quick-vue-admi是一个开箱即用的后台集成解决方案，它基于[Vue](https://cn.vuejs.org/)、[Element](http://element-cn.eleme.io)和[MongoDB]（https://www.mongodb.com/），开创性地开发出基于配置的开发解决方案，帮你最快速地搭建企业级后台产品.
 
-# [Document](https://linzhixian.github.io/quick-vue-admin-document)
+ ## [使用文档] (https://linzhixian.github.io/quick-vue-admin-document)
   
-# Live Demo:
+ ## 演示
  https://linzhixian.github.io/element-vue-admin
  
 ## Dependencies

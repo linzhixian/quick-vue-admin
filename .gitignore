@@ -1,4 +1,11 @@
+.DS_Store
 /node_modules
-/logs
+
 /yarn.lock
 /www
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+package-lock.json
