@@ -7,13 +7,25 @@ load("example", require("./example"));
 
 function load(path, modules) {
     for (let key of Object.keys(modules)) {
-        modules[key].columnsMap = {};
-        if (modules[key].columnsDef) {
-            for (let one of modules[key].columnsDef) {
-                modules[key].columnsMap[one.prop] = one;
+        let modu=modules[key]
+        modu.columnsMap = {};
+        modu.subPermissions=[]
+        if (modu.columnsDef) {
+            for (let one of modu.columnsDef) {
+                modu.columnsMap[one.prop] = one;
+                if(one.input && one.input.ajax && one.input.ajax.path) {
+                   modu.subPermissions.push( one.input.ajax.path) 
+                }
             }
         }
-        map["/" + path + "/" + key] = modules[key];
+
+       if(modu.loadDatas) {
+        modu.loadDatas.forEach(function(item){
+            modu.subPermissions.push(item.ajax.path)
+        })
+       }
+
+        map["/" + path + "/" + key] = modu;        
         console.log("loaded:" + "/" + path + "/" + key);
     }
 }

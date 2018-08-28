@@ -5,7 +5,8 @@ module.exports = {
             label: '部门名称',
             width: 240,
             filter: true,
-            input: { type: 'text', rule: 'required' }
+            input: { type: 'text', rule: 'required' },
+            index:true
         },
                 {
             prop: 'config',

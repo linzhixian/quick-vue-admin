@@ -1,4 +1,4 @@
-<!--核心组件:功能区-->
+submitCheck<!--核心组件:功能区-->
 
 <template>
      <section>
@@ -6,7 +6,7 @@
         <el-row>    
          <el-col :span="3"> 
              <el-form :inline="true" >
-                <el-form-item v-if="showAdd">
+                <el-form-item v-if="showAdd &&  checkPermission('add')">
                     <el-button type="primary" size="medium" @click="handleAdd">新增</el-button>
                 </el-form-item>                                
             </el-form>
@@ -30,7 +30,7 @@ import AddOrEditForm from './AddOrEditForm.vue';
 import extendComponents from './extend'; //导入功能区扩展组件列表
 import { Loading } from 'element-ui';
 import { Notification } from 'element-ui';
-
+import * as PageUtil from './PageUtil';
 
 export default {
       props: ['value','api','currentRow'],
@@ -57,6 +57,9 @@ export default {
     },
     
     methods: {
+       checkPermission:function(action){
+        return PageUtil.checkPermission(this.value.id,action)
+       },
        add: function() {
              this.$emit('action','add');  
         },
@@ -96,12 +99,11 @@ export default {
       onEditOpen() {  
           if(this.$refs.editform)  {    
            this.$refs.editform.forEdit();  
+           this.$refs.editform.setFormData(this.currentRow);                     
+           if (this.value.hook && this.value.hook.onShowEdit) {     
+            setTimeout(()=>{this.value.hook.onShowEdit(this.$refs.editform.addForm, this.$refs.editform);},200)}
           }
-          this.$refs.editform.setFormData(this.currentRow);                     
-          if (this.value.hook && this.value.hook.onShowEdit) {                                        
-            this.value.hook.onShowEdit(this.addForm, this);
-                    
-          }
+         
       },
      callEdit(params) { return this.ajaxEdit(params, this.value.path); },
      callAdd(params) { return this.ajaxAdd(params, this.value.path); },
@@ -124,7 +126,7 @@ export default {
 
         formSubmit:function(formData,{forEdit=false,reload=false,cb}) {
              if (this.value.hook && this.value.hook.submitCheck) {
-                      formData = this.value.hook.submitCheck(formData, this);
+                      formData = this.value.hook.submitCheck(formData, this.$refs.editform);
              }
             let loadingInstance = Loading.service({lock: false,text: '提交...',spinner: 'el-icon-loading',background: 'rgba(0, 0, 0, 0.7)'});
              console.log("forSubmit:------------------");

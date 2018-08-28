@@ -13,10 +13,10 @@ import { routes } from "./routes";
 
 //Mock.bootstrap();
 import "font-awesome/css/font-awesome.min.css";
-import PageAdmin from './components/PageAdmin.vue';
+import TableAdmin from './components/TableAdmin.vue';
 import TreeAdmin from './components/TreeAdmin.vue';
 
-import CustomPage from './components/custom/CustomPage.vue'
+
 import LoadCustomPage from './components/custom/'
 
 import { generateRoutes } from "./routes";
@@ -24,7 +24,7 @@ import { generateRoutes } from "./routes";
 Vue.use(ElementUI);
 Vue.use(VueRouter);
 Vue.use(Vuex);
-Vue.component('page-admin', PageAdmin);
+Vue.component('table-admin', TableAdmin);
 Vue.component('tree-admin', TreeAdmin);
 
 LoadCustomPage.load(Vue)

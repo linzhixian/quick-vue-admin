@@ -1,30 +1,26 @@
 module.exports = {
     title: 'HR系统',
+    pwdmd5:'323d23923#23fsfgb',
     nav_menu: [{
+            id:100,
             path: '/',
             name: '功能',
             iconCls: 'el-icon-menu', //图标样式class       
             children: [
-                { path: '/company/Employee', name: '员工' },
-                { path: '/company/Approve', name: '审批' },
-                { path: '/company/Doc', name: '文档' }
+                {id:101, path: '/company/Department', name: '部门' },
+                {id:102, path: '/company/Employee', name: '员工' },
+
             ]
-        },
+        },              
         {
-            path: '/',
-            name: '设置',
-            iconCls: 'el-icon-menu', //图标样式class       
-            children: [
-                { path: '/company/Department', name: '部门' }
-            ]
-        },    
-        {
+            id:200,
             path: '/',
             name: '样例',
-            iconCls: 'el-icon-menu', //图标样式class       
+            iconCls: 'el-icon-menu',    
             children: [
-                { path: '/example/Input', name: '输入大全' },
-                { path: '/example/Custom', name: '自定义页面' }
+                { id:201,path: '/example/Input', name: '输入大全' },
+                { id:202,path: '/example/Tree', name: '树之CRUD' }, // 
+                { id:203,path: '/example/SetThemeColor', name: '设置主题颜色' } // 
             ]
         }
     ]

@@ -7,7 +7,7 @@
     <el-form-item prop="checkPass">
       <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="密码"></el-input>
     </el-form-item>
-    <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
+   
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2" :loading="logining">登录</el-button>
       <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
@@ -19,7 +19,9 @@
   import Vue from "vue";  
   import {routes,generateRoutes} from "./../routes";
   import { requestLogin } from '../api/api';
-  import {title} from "../../../config/shared/nav_menu";
+   import {md5,title,pwdmd5} from "../include";
+
+  console.log("-------title",title,pwdmd5)
   //import NProgress from 'nprogress'
   export default {
     data() {
@@ -39,8 +41,7 @@
             { required: true, message: '请输入密码', trigger: 'blur' },
             //{ validator: validaePass2 }
           ]
-        },
-        checked: true
+        }
       };
     },
     methods: {
@@ -54,7 +55,8 @@
             //_this.$router.replace('/table');
             this.logining = true;
             //NProgress.start();
-            var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
+            var loginParams = { username: this.ruleForm2.account, password: md5(this.ruleForm2.checkPass+pwdmd5) };
+            console.log(loginParams)
             requestLogin(loginParams).then(resData => {
               this.logining = false;
               //NProgress.done();
@@ -71,8 +73,6 @@
                 _this.$router.addRoutes(otherRoutes);
                 if(data.user.type=='root') {
                  this.$router.push({ path: '/sys/User' });
-                } else if(data.user.type=='gunProducer') {
-                  this.$router.push({ path: '/stat/GunnewStatForProducer' });
                 } else {
                   this.$router.push({ path: '/' });
                 }

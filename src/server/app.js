@@ -76,26 +76,22 @@ exports.init = async function() {
 
 
         //美化输出的json格式
-        app.use(convert(json()));
-        console.log("-----connect mongodb xxxxxxx")
-        let db=await mongoDb.connect(config.mongodb)
-        console.log("-----connect mongodb end")
-        services.ensureMongoDbIndex(theDb)
-        services.initAdminAccount(theDb)
+        app.use(convert(json()));        
+        let db=await mongoDb.connect(config.mongodb)        
+        await services.ensureMongoDbIndex(db.collection)         
+        await services.initAdminAccount(db.collection)        
         app.use(async(ctx, next) => {
-            ctx.db = db
+            ctx.db = db.collection
             await next();
         });
-
-
+         
         app.use(convert(logger()));
 
         app.use(require('koa-static')(__dirname + '/../../www'));
 
 
         // logger
-        app.use(apiRequestLog('^/api/|^/file/'));
-
+        app.use(apiRequestLog('^/api/|^/file/'));         
         //添加格式化处理响应结果的中间件，在添加路由之前调用
         //仅对/api开头的url进行格式化处理
         app.use(response_formatter('^/api/admin'));
@@ -108,14 +104,12 @@ exports.init = async function() {
 
 
         app.use(router.routes(), router.allowedMethods());
-
-
+         
         // response
         app.on('error', function(err, ctx) {
             console.log(err)
             console.error('server error', err, ctx);
-        });
-        console.log("reurn app.callback")
+        });        
         return app.callback()
 
 }

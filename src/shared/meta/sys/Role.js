@@ -3,21 +3,25 @@ var nav_menu = require('../../../../config/shared/nav_menu');
 //实体名定义，也是mongodb的数据保存集合名
 let entityName = "role";
 let methods = {
-    submitCheck: function(para, tableAdmin) {
+    submitCheck: function(para, vum) {
         console.log("------submitCheck");
-        console.log(tableAdmin.$refs);
-        let checkRights = tableAdmin.$refs.tree[0].getCheckedKeys();
+        //console.log("refs",tableAdmin.$refs);
+        let checkRights = vum.$refs.right[0].getCheckedKeys();
         para.right = {};
         for (let oneid of checkRights) {
-            let oneRight = {};
+            let oneRight = {};    
+            console.log('p' + oneid + 'add')
             console.log(document.getElementById('p' + oneid + 'add'));
-            if (document.getElementById('p' + oneid + 'add').checked) {
+            let add=document.getElementById('p' + oneid + 'add')
+            if (add && add.checked) {
                 oneRight.add = 1;
             }
-            if (document.getElementById('p' + oneid + 'edit').checked) {
+            let edit=document.getElementById('p' + oneid + 'edit')
+            if (edit && edit.checked) {
                 oneRight.edit = 1;
             }
-            if (document.getElementById('p' + oneid + 'remove').checked) {
+              let remove=document.getElementById('p' + oneid + 'remove')
+            if (remove && remove.checked) {
                 oneRight.remove = 1;
             }
             para.right[oneid] = oneRight
@@ -27,29 +31,26 @@ let methods = {
     formatRight: function(row, column) {
         return "...";
     },
-    onShowEdit: function(addForm, tableAdmin) {
+    onShowEdit: function(addForm, vum) {
         let right = addForm.right;
-        if (right) {
-            let ids = Object.keys(right);
-            if (tableAdmin.$refs.tree instanceof Array) {
-                tableAdmin.$refs.tree[0].setCheckedKeys(ids);
-            }
-            for (let id of ids) {
-                let actions = right[id];
-                if (actions.add) {
-                    document.getElementById('p' + id + 'add').disabled = false;
-                    document.getElementById('p' + id + 'add').checked = true;
+        if (!right) reurn
+        if (!vum.$refs.right) return
+        let ids = Object.keys(right);            
+        vum.$refs.right[0].setCheckedKeys(ids);
+        setTimeout(()=>{
+                 for (let id of ids) {  
+                   let actions = right[id];                 
+                   if (document.getElementById('p' + id + 'add')) {                   
+                    document.getElementById('p' + id + 'add').checked =(actions.add==1)
+                    document.getElementById('p' + id + 'edit').checked = (actions.edit==1)
+                    document.getElementById('p' + id + 'remove').checked = (actions.remove==1)
+                  }                 
                 }
-                if (actions.edit) {
-                    document.getElementById('p' + id + 'edit').disabled = false;
-                    document.getElementById('p' + id + 'edit').checked = true;
-                }
-                if (actions.remove) {
-                    document.getElementById('p' + id + 'remove').disabled = false;
-                    document.getElementById('p' + id + 'remove').checked = true;
-                }
-            }
-        }
+        },200)
+            
+
+
+        
     },
     onShowAdd: function(addForm, tableAdmin) {
         if (tableAdmin.$refs.tree instanceof Array) {
@@ -58,28 +59,37 @@ let methods = {
     },
     renderContent: function(h, { node, data, store }) {
         if (data.path == '/') {
-            return h('span', node.label);
+            return (<span>{node.label}</span>)
         } else {
-            let fc = [];
-            fc.push(h("input", { attrs: { type: 'checkbox', value: 'add', id: 'p' + data.id + 'add' } }));
-            fc.push("新增");
-            fc.push(h("input", { attrs: { type: 'checkbox', value: 'edit', id: 'p' + data.id + 'edit' } }));
-            fc.push("修改");
-            fc.push(h("input", { attrs: { type: 'checkbox', value: 'remove', id: 'p' + data.id + 'remove' } }));
-            fc.push("删除");
-            return h('span', [h('span', node.label), h('span', { attrs: { id: 'p' + data.id }, style: { display: 'none', float: 'right', marginRight: '20px' } }, fc)]);
+
+           return (
+          <span style="flex: 1;display: flex;align-items: center;justify-content: space-between;font-size: 14px;padding-right: 8px;">
+            <span>{node.label}</span>
+            <span id={'p'+data.id} style="display:none">
+              <input type="checkbox"  id={'p'+data.id+'add'}/>新增&nbsp;&nbsp;
+              <input type="checkbox"  id={'p'+data.id+'edit'}/>修改&nbsp;&nbsp;
+              <input type="checkbox"  id={'p'+data.id+'remove'}/>删除
+              
+            </span>
+          </span>)
         }
     },
     checkChange: function(data, isCheck) {
         if (data.path != '/') {
             let id = data.id;
-            document.getElementById('p' + id).style.display = isCheck ? "" : "none";
-            if (document.getElementById('p' + id + 'add'))
+            if( document.getElementById('p' + id)) {
+             document.getElementById('p' + id).style.display = isCheck ? "" : "none";
+            }
+            if (document.getElementById('p' + id + 'add')) {
                 document.getElementById('p' + id + 'add').checked = isCheck;
-            if (document.getElementById('p' + id + 'edit'))
+            }
+            if (document.getElementById('p' + id + 'edit')){
                 document.getElementById('p' + id + 'edit').checked = isCheck;
-            if (document.getElementById('p' + id + 'remove'))
+            }
+            if (document.getElementById('p' + id + 'remove')) {
+                console.log("--checkChange set move",isCheck)
                 document.getElementById('p' + id + 'remove').checked = isCheck;
+            }
         }
     }
 };
@@ -87,12 +97,9 @@ let methods = {
 
 function loadTreeData() {
     let ops = {};
-    ops.props = { label: 'name', children: 'children' };
+   
     ops.data = nav_menu.nav_menu;
-    ops.handleCheckChange = function() {};
-    ops.renderContent = methods.renderContent;
-    ops.checkChange = methods.checkChange;
-    return ops;
+    return ops.data;
 }
 //列定义
 /**
@@ -103,7 +110,8 @@ let columnsDef = [{
         label: '角色名',
         width: 250,
         input: { type: 'text', rule: 'required' },        
-        filter: true
+        filter: true,
+        index:{options:{unique:true}}
     },
     {
         prop: 'memo',
@@ -115,7 +123,7 @@ let columnsDef = [{
         prop: 'right',
         label: '权限',
         width: 200,
-        input: { type: 'tree', options: loadTreeData() },
+        input: { type: 'tree',expandAll:true, nodeKey:'id',renderContent:methods.renderContent, props:{ label: 'name', children: 'children' },data: loadTreeData(),checkChange:methods.checkChange },
         formatter: methods.formatRight
     }
 ];
@@ -137,3 +145,8 @@ exports.entityName = entityName;
 exports.columnsDef = columnsDef;
 exports.api = api;
 exports.methods = methods;
+exports.hook={
+    submitCheck:methods.submitCheck,
+    onShowEdit:methods.onShowEdit,
+    onShowAdd:methods.onShowAdd
+}

@@ -15,11 +15,10 @@ function loadDir(moduleName,dirPath) {
     dir.files(dirPath, function(err, files) {
      if (err) throw err;
      for(let oneFile of files) {        
-        let key=path.basename(oneFile,".js")
-        if(key.endsWith('_server')) {
-            console.log("server loaded:" + "/" + moduleName + "/" + key);
+        let key=path.basename(oneFile,".js")        
+          console.log("server loaded:" + "/" + moduleName + "/" + key);
            map["/" + moduleName + "/" + key] = require(oneFile)
-        }
+        
     }
 });
 }

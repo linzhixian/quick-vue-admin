@@ -12,6 +12,6 @@
         }
         ]
     ],
-    "plugins": ["transform-runtime", "transform-object-rest-spread"]
+    "plugins": ["transform-runtime", "transform-object-rest-spread","transform-vue-jsx"]
     
 }

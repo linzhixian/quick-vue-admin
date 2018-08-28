@@ -7,9 +7,8 @@ let entityName = "user";
 
 let data = {};
 let typeNames = {
-    'root': '超级管理员',
-    'admin': '管理员',
-    'pitcher': '投手'
+    'root': '管理员',
+    'admin': '普通用户'
 };
 let methods = {
     formatType: function(row, column) {
@@ -31,7 +30,7 @@ let methods = {
             let roleids = row[column.property];
             if (roleids.length > 0) {
                 for (let id of roleids) {
-                    res = res + getRoleName(id) + ",";
+                    res = res + id + ",";
                 }
             }
             if (res.endsWith(",")) {
@@ -43,15 +42,6 @@ let methods = {
     }
 };
 
-function getRoleName(roleId) {
-    if (!roleId) return roleId;
-    if (data.roles) {
-        for (let role of data.roles) {
-            if (roleId == role._id) return role.name;
-        }
-    }
-    return roleId;
-}
 
 function getSelectOptions(names) {
     let options = [];
@@ -72,7 +62,8 @@ let columnsDef = [{
         label: '用户名',
         width: 250,
         input: { type: 'text', rule: 'required' },
-        filter: true
+        filter: true,
+        index:{options:{unique:true}}
     }, {
         prop: 'password',
         label: '密码',
@@ -89,16 +80,14 @@ let columnsDef = [{
         label: '所属角色',
         width: 250,
         input: {
-            type: 'selectMulti',
-            options: {
-                multiple: true,
-                ajax: {
-                    entityName: "/sys/Role",
+            type: 'select',
+            multiple:true,
+            ajax: {
+                    path: "/sys/Role",
                     params: {},
                     label: 'name',
                     value: '_id'
                 }
-            }
         },
         formatter: methods.formatRoles
     }, {
@@ -106,7 +95,7 @@ let columnsDef = [{
         label: '状态',
         width: 150,
         input: {
-            type: 'radio',
+            type: 'radioGroup',
             options: [{
                 label: '启用',
                 value: true
@@ -149,11 +138,3 @@ exports.entityName = entityName;
 exports.columnsDef = columnsDef;
 exports.serverHook = serverHook;
 exports.methods = methods;
-exports.loadDatas = [{
-    name: 'roles',
-    ajax: {
-        entityName: '/sys/Role',
-        params: {}
-    }
-}];
-exports.data = data;

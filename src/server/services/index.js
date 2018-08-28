@@ -22,7 +22,7 @@ exports.getGloblConfigValue=async function(db,key) {
       return null
     }
 }
-exports.ensureMongoDbIndex=function(db) {   
+exports.ensureMongoDbIndex=async function(db) {   
    for(let v of Object.values(metaIndex)) {      
       if(!v.columnsDef) continue      
       for(let oneDef of v.columnsDef) {
@@ -32,23 +32,24 @@ exports.ensureMongoDbIndex=function(db) {
               fields[oneDef.prop]=1
               if(index.sortOrder) {
                  fields[oneDef.prop]=index.sortOrder
-              }
-              console.log("---------encureIndex",v.entityName,fields,index.options)
-              db.getCollection(v.entityName).ensureIndex(fields,index.options,function(err){
+              }                          
+              db(v.entityName).createIndex(fields,index.options,function(err,reply){
                 if(err) {
-                  console.log(CommonUtils.errorMsg(err))
+                  console.log(err)
                   throw err
-                }
+                } else {
+                  console.log(reply)
+                }             
               })
+
           }
       }
    }
 }
 
-exports.initAdminAccount=function(db) {
-        db.getCollection("user").findOne({ username:'admin' }, null, function(reply) {
-            if (reply.documents.length== 0) {
-                 db.getCollection("user").save({username:'admin',password:'admin',type:'root'})
-            } 
-        });
+exports.initAdminAccount=async function(db) {       
+        let find=await db("user").findOne({ username:'admin' })        
+        if(!find) {           
+           db("user").insert({username:'admin',password:'admin',type:'root',enable:true},{},function(x){console.log("insert admin",x)})
+        }
 }

@@ -39,8 +39,8 @@ module.exports = {
             prop: 'select_ajax',
             label: '动态选择框',
             width: 150,
-            input:{type:'select',ajax:{path:'/company/Department',label:'name',value:'_id',projects:{_id:1,name:1}}}
-        },
+            input:{type:'select',ajax:{path:'/company/Department',label:'name',value:'_id'}}                   
+        },     
         {
             prop: 'radioGroup',
             label: '单选框',
@@ -64,6 +64,7 @@ module.exports = {
             prop: 'date',
             label: '日期',
             width: 150,
+
             input:{type:'date',subType:'date',format:'yyyy 年 MM 月 dd 日',valueFormat:'yyyyMMdd'}
         } 
         ,
@@ -108,7 +109,8 @@ module.exports = {
         input: {            
             type: 'tree',
             data:provinceAndCityData,
-            props:{label:'label',children:'city'}
+            props:{label:'label',children:'city'},
+            nodeKey:'label'
 
         }
     },   

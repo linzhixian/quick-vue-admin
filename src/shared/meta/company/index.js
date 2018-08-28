@@ -1,3 +1,4 @@
 import * as Department from "./Department"
+import * as Employee from "./Employee"
 
-module.exports = {Department}
+module.exports = {Department,Employee}

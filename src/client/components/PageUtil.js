@@ -33,3 +33,13 @@ exports.convertDotBack = function(str) {
     }
     return str
 }
+
+exports.checkPermission=function(id,action) {
+      let user = JSON.parse(sessionStorage.getItem("user"));
+      console.log("checkPermission",user,id,action)
+      if(user.type=='root') return true
+      if(user.right) {
+        return user.right[id] && user.right[id][action]
+      }
+      return false
+}

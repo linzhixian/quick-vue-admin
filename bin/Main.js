@@ -63,10 +63,10 @@ console.log('port = ' + config.port);
  */
 console.log(app)
 
-
+    let server =
 app.init().then((callback)=>{
     console.log("---------ceateServer")
-    let server = http.createServer(callback);
+    server=http.createServer(callback);
     /**
      * Listen on provided port, on all network interfaces.
      */

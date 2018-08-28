@@ -1,4 +1,4 @@
-<!--核心组件：封装了树的增删改-->
+<!--核心组件：封装了增删改查翻页-->
 <template>
     <section>
 
@@ -7,27 +7,73 @@
          <el-button type="primary" @click="handleAddTop">新增</el-button>
          <el-input placeholder="输入关键字进行过滤" v-model="filterText"></el-input>
 
-
-         <el-tree   class="filter-tree" :filter-node-method="filterNode" accordion :default-expanded-keys="expandedKeys" :data="treeData" :props="treeProps" node-key="_id"  :render-content="leafActions"  ref="tree" >
+<br><br>
+ <div class="tree">
+         <el-tree   class="filter-tree" :filter-node-method="filterNode" accordion :default-expanded-keys="expandedKeys" :data="treeData" :props="treeProps" node-key="_id"   ref="tree" >
+             <span class="custom-tree-node" slot-scope="{ node, data }">
+                <span>{{ node.label }}</span>
+                <span>
+                  <el-button
+                    type="success"
+                    size="mini"
+                     icon="el-icon-circle-plus"
+                     circle
+                    @click="() => add(node,data)">                    
+                  </el-button>
+                  <el-button
+                    
+                    icon="el-icon-edit"
+                    size="mini"
+                    circle
+                    @click="() => edit(node, data)">                    
+                  </el-button>                  
+                  <el-button
+                    type="danger"
+                    icon="el-icon-delete"
+                    size="mini"
+                    circle
+                    @click="() => remove(node, data)">                    
+                  </el-button>
+                </span>
+              </span>
          </el-tree>
 
+         
 
+</div>
+        
         <!--新增和编辑界面-->
-        <el-dialog :title="dialogTitle" v-model="addFormVisible" :close-on-click-modal="false">
+        <el-dialog :title="dialogTitle" :visible.sync="addFormVisible" :close-on-click-modal="false">
            <!-- <edit-form ></edit-form> -->
             <component :is="currentEditForm" :columnsDef="init.columnsDef" :api="api" ref="editform"  v-on:cancel="addFormVisible=false"  v-on:submit="formSubmit"></component>
         </el-dialog>
+
+
+
     </section>
 </template>
 <style>
-.el-table .disable-row {
-    background: #C0CCDA;
-}
+  .custom-tree-node {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    padding-right: 8px;
+    height:150px;
+  }
+  .tree {
+     border-width: 1px;
+    border-style: solid;
+    border-color: #BBB;
+    width: 800px;   
+    background-color: #EEE;
+  }
 </style>
 <script>
 import * as PageUtil from './PageUtil';
 import * as api from '../api/PageAdminApi';
-import AddOrEditForm from './AddOrEditForm.vue'; 
+import AddOrEditForm from './AddOrEditForm2.vue'; 
 
 export default {
          components: {    
@@ -110,19 +156,6 @@ export default {
 
             });
         },
-        leafActions(h, { node, data, store }) {
-            if (data.path == '/') { 
-                return h('span', node.label);
-            } else {
-                let fc = [];
-                fc.push(h("el-button", { on: { click: () =>this.add(node,data)  }, attrs: { size:'mini',type: 'primary' } },['新增']));
-                fc.push(h("el-button", { on: { click: () =>this.edit(node,data)  }, attrs: {size:'mini',type: 'success' } },['修改']));
-                fc.push(h("el-button", {  on: { click: () =>this.remove(node,data)  },attrs: { size:'mini',type: 'danger' } },['删除']));
-                //return h('span', fc);
-                return h('span', [h('span', node.label), h('span', { style: { float: 'right', marginRight: '20px' } }, fc)]);
-            }
-        },
-
         getYYYYMMDD: function(date) {
             if (date instanceof Date) {
                 var month = date.getMonth() + 1;
@@ -173,10 +206,10 @@ export default {
                      this.$refs.editform.forEdit();  
                          this.$refs.editform.setFormData(data); 
                     }, 20);
-                if (this.init.hook && this.init.hook) {
+                if (this.init.methods && this.init.methods.onShowEdit) {
                     //延时触发该事件，因为必须等ddialog初始化完毕
                     setTimeout(() => {
-                        this.init.hook.onShowEdit(this.addForm, this);
+                        this.init.methods.onShowEdit(this.addForm, this);
                     }, 20);
                 }
             
@@ -192,28 +225,29 @@ export default {
             //if(this.$refs.editform.clearFormData)
             //this.$refs.editform.clearFormData();
             console.log("---handleAdd-----------111111111");
-            setTimeout(() => {     
+            setTimeout(() => {    
+                        console.log(this.$refs) 
+                        console.log(this.$refs.editform) 
                         this.$refs.editform.forAdd();
                         if(this.$refs.editform.clearFormData)                  
                         this.$refs.editform.clearFormData();    
             }, 20);
-            if (this.init.hook && this.init.hook.onShowAdd) {
+            if (this.init.methods && this.init.methods.onShowAdd) {
                 //延时触发该事件，因为必须等ddialog初始化完毕
                 setTimeout(() => {
-                    this.init.hook.onShowAdd(this.addForm, this);
+                    this.init.methods.onShowAdd(this.addForm, this);
                 }, 20);
             }
         },
-        formSubmit:function(formData,loadingInstance) {
-             if (this.init.hook && this.init.hook.submitCheck) {
-                      formData = this.init.hook.submitCheck(formData, this);
+        formSubmit:function(formData) {
+             if (this.init.methods && this.init.methods.submitCheck) {
+                      formData = this.init.methods.submitCheck(formData, this);
              }
              console.log("currentEditPath");
              console.log(this.currentEditPath);
              formData.$path=this.currentEditPath;             
             this.dialogSubmitCall(formData).then((res) => {
-                            this.addLoading = false;
-                            loadingInstance.close();         
+                            this.addLoading = false;                                
                             if (res.data.status.code == "0") {
                                 this.$message({
                                     message: '提交成功',
@@ -248,7 +282,7 @@ export default {
             //NProgress.start();
             this.callList().then((res) => {
                 console.log(res);     
-                this.treeData = res.data.data;
+                this.treeData = this.convertDocs(res.data.data)
                 this.listLoading = false;
                 if(this.filterText) {
                     setTimeout(() => {
@@ -259,7 +293,38 @@ export default {
                 //NProgress.done();
             });
         },
+    convertDocs(docs) {        
+        let treeData = [];
+        for (let one of docs) {
+            if (one.sub) {
+                one.sub = this.subToArray(one.sub);
+            }           
+        }
+        return docs;
+    },
+    subToArray(doc) {
+            let a = [];
+            for (let key of Object.keys(doc)) {
+                let v = doc[key];
+                let name = null;
+                let one = { _id: key };
+                if (typeof v == 'string') {
+                    one.name = v;
+                } else {
+                    for (let vv of Object.keys(v)) {
+                        if (vv == 'sub') {
+                            one[vv] = this.subToArray (v[vv]);
+                        } else
+                            one[vv] = v[vv];
 
+
+                    }
+                }        
+                a.push(one);
+            }
+            console.log(a);
+            return a;
+    }
     },
     mounted() {
         this.getRecords();

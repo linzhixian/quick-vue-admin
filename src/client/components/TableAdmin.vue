@@ -43,7 +43,7 @@
         </el-table>
         <!--工具条-->
         <el-col :span="24" class="toolbar">
-            <el-button v-if="init.showRemove" type="danger" @click="batchRemove" :disabled="this.sels.length===0">删除</el-button>
+            <el-button v-if="init.showRemove && checkPermission('remove')" type="danger" @click="batchRemove" :disabled="this.sels.length===0">删除</el-button>
             <el-pagination v-if="init.showPagination" layout="total, sizes,prev, pager, next" @current-change="handleCurrentChange" :page-size="pageSize"
              @size-change="handlePageSizeChange"
              :page-sizes="[10,20,50,70,100, 200, 300, 400]"
@@ -68,6 +68,7 @@
 </style>
 <script>
 import * as PageUtil from './PageUtil';
+import * as CommonUtils from '../../shared/utils/CommonUtils';
 import * as api from '../api/PageAdminApi';
 
 
@@ -97,7 +98,7 @@ export default {
 
             records: [],
             total: 0,
-            pageSize: this.init.pageSize ? this.init.pageSize : 20,
+            pageSize: this.init.pageSize ? this.init.pageSize : 10,
             page: 1,
             listLoading: false,
             sels: [], //列表选中列
@@ -113,7 +114,7 @@ export default {
         }
     },
     created: function() {        
-        this.setValuedefault(this.init, "pageSize", 20);
+        this.setValuedefault(this.init, "pageSize", 10);
         this.setValuedefault(this.init, "showAdd", true);
         this.setValuedefault(this.init, 'editable', true);
         this.setValuedefault(this.init, 'showRemove', true);
@@ -132,8 +133,8 @@ export default {
         let _this = this;
         if (this.init.loadDatas) {
             for (let oneLoad of this.init.loadDatas) {
-                let { entityName, params,projects } = oneLoad.ajax;
-                api.callList({ filter: params,projects }, entityName).then(function(res) {
+                let { path, params,projects } = oneLoad.ajax;
+                api.callList({ filter: params,projects }, path).then(function(res) {
                     console.log("loadData",oneLoad.name,res.data.data)
                     _this.init.data[oneLoad.name] = res.data.data;
                 });
@@ -141,6 +142,9 @@ export default {
         }
     },
     methods: {
+      checkPermission:function(action){
+        return PageUtil.checkPermission(this.init.id,action)
+       },
         callFormatter(item,value) {
             console.log("callFormatter:"+value,item)
             if(item.formatter) {
@@ -189,15 +193,14 @@ export default {
         convertTableDefs: function(columnDefs) {
             let defs = [];
             for (let elem of columnDefs.values()) {
-                if (elem && (typeof(elem.show) == "undefined" || elem.show) && elem.inputType!='file') {
-                    defs.push(elem);
-                    if (elem.inputOptions && elem.inputOptions.ajax) {
-                        let { entityName, params, label, value } = elem.inputOptions.ajax;
-                        api.callList({ filter: params }, entityName).then(function(res) {
-                            console.log("--apicall:"+entityName+",res:"+JSON.stringify(res));
-                            elem.inputOptions = PageUtil.toSelectOptions(res.data.data, label, value);
-                        });
-
+                if (elem && !elem.hidden && elem.input && elem.input.type!='file') {
+                    
+                    if ((typeof(elem.autoRef) == "undefined" || elem.autoRef)  && elem.input && elem.input.ajax) {         
+                        let newElem=CommonUtils.cloneObject(elem)
+                        newElem.prop="@"+elem.prop
+                        defs.push(newElem);
+                    } else {
+                       defs.push(elem);
                     }
                     if(elem.download){
                         elem.downloadUrl="/file/download"+this.init.path+"?prop="+elem.prop
@@ -205,6 +208,7 @@ export default {
                 } 
 
             }
+            console.log("----defs",defs)
             return defs;
         },
         callListPage(params) { return this.ajaxListPage(params, this.modulePath); },
@@ -267,7 +271,7 @@ export default {
         //显示编辑界面
         handleEdit: function(row) {
             console.log("handleEdit",this.init.editable)
-            if (this.init.editable) {
+            if (this.init.editable && PageUtil.checkPermission(this.init.id,'edit')) {
                  this.$refs.actionbuttons.fromParent('edit',row);
             }
         },
@@ -284,8 +288,7 @@ export default {
             this.$confirm('确认删除选中记录吗？', '提示', {
                 type: 'warning'
             }).then(() => {
-                this.listLoading = true;
-                //NProgress.start();
+                this.listLoading = true;                
                 let para = { ids: ids };
                 this.callBatchRemove(para).then((res) => {
                     this.listLoading = false;
@@ -308,7 +311,6 @@ export default {
             });
         },
         handlerAction(actionName,data) {
-
             if(actionName=='reload'){
                 this.getRecords();
             }else if(actionName=='query') {

@@ -34,7 +34,7 @@
                   <el-cascader v-if="editColumnDefs[oneItem].input.type==='cascader'" v-model="addForm[oneItem]"  :options="editColumnDefs[oneItem].input.options" :props="editColumnDefs[oneItem].input.props"  :placeholder="editColumnDefs[oneItem].input.placeholder" clearable filterable :change-on-select="editColumnDefs[oneItem].input.changeOnSelect"/> 
 
                     <input  :id="oneItem" v-else-if="editColumnDefs[oneItem].input.type==='file'"   @change="getFile($event,oneItem)"  type="file" />
-                    <el-tree v-else-if="editColumnDefs[oneItem].input.type==='tree'" v-model="addForm[oneItem]" :data="editColumnDefs[oneItem].input.data" :props="editColumnDefs[oneItem].input.props" :ref="oneItem" node-key="label" show-checkbox>
+                    <el-tree v-else-if="editColumnDefs[oneItem].input.type==='tree'" v-model="addForm[oneItem]" :data="editColumnDefs[oneItem].input.data" :props="editColumnDefs[oneItem].input.props" :render-content="editColumnDefs[oneItem].input.renderContent" :ref="oneItem" :node-key="editColumnDefs[oneItem].input.nodeKey" show-checkbox @check-change="editColumnDefs[oneItem].input.checkChange" :default-expand-all="editColumnDefs[oneItem].input.expandAll">
                     </el-tree>
 
                     <el-date-picker v-if="editColumnDefs[oneItem].input.type==='date'"
@@ -142,7 +142,10 @@ import Vue from "vue";
             this.hasFileInput=true;         
       },
       createPromise(input){
-        let { path, params, label, value,projects } = input.ajax;
+        let { path, params, label, value} = input.ajax;
+        let projects={}
+        projects[label]=1
+        projects[value]=1
         let theapi=this.api;
         return new Promise(function(resolve, reject) {  
                       theapi.callList({ filter: params,projects }, path).then(function(res) {
@@ -260,7 +263,7 @@ import Vue from "vue";
                  
                   if(this.$refs[one.prop]) {                    
                     var obj =this.$refs[one.prop][0]
-                     if(row && row[one.prop]) {
+                     if(row && row[one.prop] && Array.isArray( row[one.prop])) {
                        obj.setCheckedKeys(row[one.prop])   
                      } else {
                        obj.setCheckedKeys([])
@@ -281,6 +284,7 @@ import Vue from "vue";
                this.addForm[one.prop]=one.input.formatter(this.addForm[one.prop],this);
             } else if(one.input.type=='tree') {
               this.addForm[one.prop]=this.$refs[one.prop][0].getCheckedKeys(false)
+              console.log("tree.getCheckedKeys", this.addForm[one.prop])
             }
           }
         },

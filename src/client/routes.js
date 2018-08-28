@@ -6,7 +6,7 @@ import Main from './views/Main.vue'
 import Vue from "vue";
 
 
-let {nav_menu,metaMap}=require("./include")
+let { nav_menu, metaMap } = require("./include")
 
 
 
@@ -25,14 +25,14 @@ function hasRight(user, menuItem) {
 
     if (user.right) {
         for (let one of ids) {
-            if (user.right[one]) return true;
+            if (user.right[one] && user.right[one]!=true) return true;
         }
     }
 
     return false;
 }
 
-function createComponent(name) {
+function createComponent(name,id) {
     if (name == '/') return Home;
     let metaData = metaMap[name];
 
@@ -41,12 +41,13 @@ function createComponent(name) {
         console.log("no found:" + name);
         return NotFound;
     }
+    metaData.id=id
     metaData.path = name;
     if (name.includes("/")) {
         name = name.replace(/\//g, '');
     }
-    let pageAdmin = metaData.pageAdminComponent ? metaData.pageAdminComponent : "page-admin";
-    console.log("create compoent:"+name+":" + pageAdmin);
+    let pageAdmin = metaData.pageAdminComponent ? metaData.pageAdminComponent : "table-admin";
+    console.log("create compoent:" + name + ":" + pageAdmin);
     return Vue.component(name, {
         template: '<' + pageAdmin + '  :init="metaData" ></' + pageAdmin + '>',
         data() {
@@ -83,16 +84,16 @@ function generateRoutes() {
         }
     });
     for (let item of otherRoutes) {
-        if(!item.component) {
-         item.component = createComponent(item.path);
+        if (!item.component) {
+            item.component = createComponent(item.path,item.id);
         }
         if (item.children) {
             for (let one of item.children) {
-                if(!one.component) {
-                 one.component = createComponent(one.path);
-               } else {
-                  console.log("EXIT",one.path,one.component)
-               }
+                if (!one.component) {
+                    one.component = createComponent(one.path,one.id);
+                } else {
+                    console.log("EXIT", one.path, one.component)
+                }
             }
         }
     }
@@ -113,7 +114,7 @@ function generateRoutes() {
             }]
         });
     }
-    console.log("otherRoutes",otherRoutes)
+    console.log("otherRoutes", otherRoutes)
     return otherRoutes
 }
 

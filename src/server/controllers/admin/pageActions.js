@@ -1,5 +1,5 @@
 const R = require('ramda')
-let { utility, ApiError, ApiErrorNames, config, services, baseDao } = require('../../include');
+let { utility, ApiError, ApiErrorNames, config, services,metaIndex,CommonUtils } = require('../../include');
 const send = require('koa-send')
 
 var fs = require('fs')
@@ -58,11 +58,72 @@ function toFilterCondition(filter, serverHook, metaData, ctx) {
     }
     return conditions;
 }
+async function dbref(db,findocs,metaData,project) {      
+    let refColumns=[]
+    let deRefOne=async function(column){          
+          let metaData=metaIndex[column.input.ajax.path]
+          let filter={}
+          let values=[]
+          for(let one of findocs) {
 
+            let otype=typeof one[column.prop]             
+            if(otype=='string' || otype=='number') {
+              values.push(one[column.prop])
+            } else if(Array.isArray(one[column.prop])){
+                values=values.concat(one[column.prop])                
+            }
+          }
+          filter[column.input.ajax.value]={$in:values}
+          let project={}
+          project[column.input.ajax.label]=1
+          project[column.input.ajax.value]=1          
+          let find=db(metaData.entityName).find(filter).project(project)                      
+          let docs=await find.toArray()          
+          let findObj=function(docs,prop,value,take){
+            let vt=typeof value            
+            if(vt=='string' || vt=='number') {
+             let item=CommonUtils.findObjInArray(docs,prop,value)
+             if(item && item[take]) return item[take]
+
+            } else if(Array.isArray(value)) {
+                let ret=[]
+                for(let one of value) {
+                     let item=CommonUtils.findObjInArray(docs,prop,one)
+                     if(item && item[take]){
+                        ret.push(item[take])
+                     } else {
+                         ret.push(one)
+                     }
+                }
+                if(ret.length>0) return ret
+            }
+            return null
+          }
+          for(let item of findocs) {
+            item['@'+column.prop]=item[column.prop]
+            let find=findObj(docs,column.input.ajax.value,item[column.prop],column.input.ajax.label)
+            if(find) {
+             item['@'+column.prop]=find
+            }
+          }
+         
+
+    }
+    for(let one of metaData.columnsDef) {
+        if(one && !one.hidden &&  one.input && one.input.ajax)  {
+            if(typeof(one.autoRef) == "undefined" || one.autoRef) {
+                if(!project || (project && project[one.prop])) {
+                 await deRefOne(one)
+               }
+            }
+        }
+    }
+    return findocs
+}
 function writeSyncFile(reader, writer) {
     return new Promise((resolve) => {
         reader.pipe(writer);
-        reader.on('close', () => {
+        writer.on('close', () => {
             resolve(true);
         });
     });
@@ -122,8 +183,8 @@ let actionMap = {
                     doc = serverHook.beforeUpdate(doc,ctx);
                 }
                 let { top, path, children } = doc.$path;
-                delete doc._id;
-                delete doc.$path;
+               delete doc._id;
+               delete doc.$path;
                 let _id = top;
                 let $set = {};
                 if (top && !path) {
@@ -134,8 +195,14 @@ let actionMap = {
                     }
                 }
                 
-                ctx.db.getCollection(toCollName(entityName)).update({ _id }, { $set }, { upsert: true }, function(ok) {
-                    resolve(ok);
+                ctx.db(entityName).update({ _id }, { $set }, { upsert: true }, function(err,ok) {
+                 if(err) {
+                    console.log(err)
+                    resolve(false)
+                }  else {
+                        resolve(true)
+                    }
+
                 });
             } catch (e) {
                 reject(e);
@@ -143,14 +210,14 @@ let actionMap = {
 
         });
     },
-    addTree: function(ctx, entityName, serverHook) {
+    addTree: function(ctx, entityName, serverHook,metaData) {
         return new Promise(async(resolve, reject) => {
 
             let doc = ctx.request.body;
             console.log(doc);
             try {
                 if (serverHook && serverHook.beforeAdd) {
-                    doc = await serverHook.beforeAdd(doc, ctx);
+                    doc = await serverHook.beforeAdd(doc, ctx,metaData);
                 }
                 let { top, path, children } = doc.$path;
                 let _id = top ? top : doc._id;
@@ -166,7 +233,7 @@ let actionMap = {
                 delete doc.$path;
                 console.log("key:" + _id);
                 console.log($set);
-                ctx.db.getCollection(toCollName(entityName)).update({ _id }, { $set }, { upsert: true }, function(ok) {
+                ctx.db(entityName).updateOne({ _id }, { $set }, { upsert: true }, function(err,ok) {
                     resolve(ok);
                 });
             } catch (e) {
@@ -188,8 +255,8 @@ let actionMap = {
                 console.log("path:" + path);
                 if (top && !path) {
                     console.log("path:" + (top && !path));
-                    ctx.db.getCollection(toCollName(entityName)).deleteMany({ _id: top }, function(deleteCount) {
-                        if (deleteCount == 1) {
+                    ctx.db(entityName).deleteOne({ _id: top }, function(err,result) {
+                        if (result.deletedCount == 1) {
                             resolve(true);
                         } else {
                             resolve(false);
@@ -202,8 +269,8 @@ let actionMap = {
                     $unset[path] = doc;
                     console.log("key:" + _id);
                     console.log($unset);
-                    ctx.db.getCollection(toCollName(entityName)).update({ _id }, { $unset }, { upsert: true }, function(ok) {
-                        resolve(ok);
+                    ctx.db(entityName).updateOne({ _id }, { $unset }, { upsert: true }, function(err,result) {
+                        resolve(result);
                     });
                 }
             } catch (e) {
@@ -225,12 +292,18 @@ let actionMap = {
         if (serverHook && serverHook.beforeAdd) {
             doc = await serverHook.beforeAdd(doc, ctx,metaData);
         }
-        console.log("-------add:" + JSON.stringify(doc));
-        let ok = await baseDao.save(ctx.db, toCollName(entityName), doc)
-        if (!ok) {
-            throw new ApiError(ApiErrorNames.DUPLICATE_KEY);
-        }
-        return true
+        console.log("-------add:" + JSON.stringify(doc));    
+        try {    
+         await ctx.db(entityName).insert(doc)
+         return true
+        } catch(err) {
+            console.log("err",err.toString())
+            if(err.code==11000) {
+             throw new ApiError(ApiErrorNames.DUPLICATE_KEY);
+           } else {
+             throw new ApiError(ApiErrorNames.UNKNOW_ERROR,err.errmsg);
+           }
+        }        
 
 
     },
@@ -245,12 +318,18 @@ let actionMap = {
         console.log("--edit:" + JSON.stringify(doc));
         if (serverHook && serverHook.beforeUpdate) {
             doc = serverHook.beforeUpdate(doc,ctx);
-        }
-        let ok = await baseDao.update(ctx.db, toCollName(entityName), doc)
-        if (!ok) {
-            throw new ApiError(ApiErrorNames.DUPLICATE_KEY);
-        }
-        return true
+        }        
+        try {
+         await ctx.db(entityName).findOneAndUpdate({_id:doc._id},{$set: doc} )
+         return true
+        } catch(err) {
+            console.log("err",err.toString())
+            if(err.code==11000) {
+             throw new ApiError(ApiErrorNames.DUPLICATE_KEY);
+           } else {
+             throw new ApiError(ApiErrorNames.UNKNOW_ERROR,err.errmsg);
+           }
+        } 
 
     },
     remove: async function(ctx, entityName, serverHook,metaData) {
@@ -259,8 +338,9 @@ let actionMap = {
             if (serverHook && serverHook.beforeRemove) {
                     await serverHook.beforeRemove(doc,ctx,metaData);
             }
-            let deleteCount=await baseDao.remove(ctx.db,toCollName(entityName),{_id: doc.id})
-            return deleteCount
+            
+            let result=await ctx.db(entityName).deleteOne({_id: doc.id})
+            return result.deletedCount
 
     },
     batchremove: async function(ctx, entityName, serverHook,metaData) {        
@@ -273,41 +353,35 @@ let actionMap = {
                     _id: {
                         $in: doc.ids
                     }
-            };
-            let deleteCount=await baseDao.remove(ctx.db,toCollName(entityName),ops)
-            return deleteCount
+            };            
+            let result=await ctx.db(entityName).deleteMany(ops)
+            console.log("deleteMany",result)
+            return result.deletedCount
 
     },
-    list: async function(ctx, entityName, serverHook, metaData) {
-        return new Promise((resolve, reject) => {
+    list: async function(ctx, entityName, serverHook, metaData) {        
             console.log("list:" + entityName);
             //conditions, callback, projects, sort, limit,skip  
             let { filter, projects } = ctx.request.body;
-            let conditions = toFilterCondition(filter, serverHook, metaData, ctx);;
-            try {
+            let conditions = toFilterCondition(filter, serverHook, metaData, ctx);;            
                 console.log("list conditions:" + JSON.stringify(conditions));
 
                 if (serverHook && serverHook.beforeList) {
                     serverHook.beforeList(conditions,ctx);
                 }
-                ctx.db.getCollection(toCollName(entityName)).find(conditions, function(reply) {
-                    if (reply.documents.length > 0) {
-                        let docs = reply.documents;
-                        if (serverHook && serverHook.afterList) {
+                let findDocs=ctx.db(entityName).find(conditions)
+                if (projects) {
+                    findDocs = findDocs.project(projects);
+                }
+                let docs=await findDocs.toArray()
+                docs=await dbref(ctx.db,docs,metaData,projects)
+               if (serverHook && serverHook.afterList) {
                             docs = serverHook.afterList(docs,conditions,ctx);
-                        }
-                        ctx.body = docs;
-                        resolve(true);
-                    } else {
-                        ctx.body = [];
-                        resolve(true);
-                    }
-                }, projects, null, null, null);
+                }
 
-            } catch (e) {
-                reject(e);
-            }
-        });
+                ctx.body=docs
+                return true
+       
     },
     listpage: async function(ctx, entityName, serverHook, metaData) {
         function countTotal(db, entityName, filter) {
@@ -315,29 +389,32 @@ let actionMap = {
                 let { filter } = ctx.request.body;
                 let conditions = toFilterCondition(filter, serverHook, metaData, ctx);
                 console.log("conditions =================== " + JSON.stringify(conditions));
-                db.getCollection(toCollName(entityName)).count(conditions, function(total) {
+                db(entityName).count(conditions, function(err,total) {
                     resolve(total);
                 })
             });
         }
 
-        function findRecords(db, entityName, pageSize, page, filter, sort, ctx) {
-            return new Promise((resolve, reject) => {
+        async function findRecords(db, entityName, pageSize, page, filter, sort, ctx) {            
                 //conditions, callback, projects, sort, limit,skip
-                let { filter } = ctx.request.body;
-                let conditions = toFilterCondition(filter, serverHook, metaData, ctx);
+                let { filter2 } = ctx.request.body;
+                let conditions = toFilterCondition(filter2, serverHook, metaData, ctx);
                 let limit = pageSize;
                 let skip = (page - 1) * pageSize;
                 console.log("serverHook:" + serverHook);
                 console.log("conditions:" + JSON.stringify(conditions));
-                db.getCollection(toCollName(entityName)).find(conditions, function(reply) {
-                    if (reply.documents.length > 0) {
-                        resolve(reply.documents);
-                    } else {
-                        resolve([]);
-                    }
-                }, null, sort, limit, skip)
-            });
+                let findDocs=db(entityName).find(conditions)
+                if (sort) {
+                    findDocs = findDocs.sort(sort);
+                }                
+                if (skip) {
+                    findDocs = findDocs.skip(skip);
+                }
+                if (limit) findDocs = findDocs.limit(limit);
+
+                return dbref(db,await findDocs.toArray(),metaData,null);
+
+            
         }
 
 
@@ -370,8 +447,8 @@ let actionMap = {
 
         let { _id, prop } = ctx.query
         let error = { error: 'no' }
-        if (_id && prop) {
-            let record = await baseDao.queryOne(ctx.db, toCollName(entityName), _id);
+        if (_id && prop) {            
+            let record=await ctx.db(entityName).findOne({_id})
             if (record) {
                 let fileInfo = record[prop]
                 if (fileInfo && fileInfo.path && fileInfo.srcName) {

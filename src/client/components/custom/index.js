@@ -1,8 +1,8 @@
 
-import CustomPage from './CustomPage.vue'
+import ThemeColor from './ThemeColor.vue'
 
 exports.load = function(Vue) {	
-    Vue.component('custom-page', CustomPage)
+    Vue.component('set-theme-color', ThemeColor)
 
     
 }

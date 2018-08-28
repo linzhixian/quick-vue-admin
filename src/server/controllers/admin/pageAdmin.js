@@ -14,13 +14,12 @@ import actionMap from "./pageActions";
 let moduleMap = metaIndex;
 
 
-let entityNameToId = {};
 
 for (let oneMenu of nav_menu) {
     if (oneMenu.children) {
         for (let om of oneMenu.children) {
-            if (metaIndex[om.path]) {
-                entityNameToId[metaIndex[om.path].entityName] = om.id;
+            if (metaIndex[om.path]) {                
+                metaIndex[om.path].id=om.id
             }
         }
     }
@@ -37,11 +36,11 @@ let needParams = [];
 
 
 
-function hasRight(user, entityName, actionName) {
+function hasRight(user, path, actionName) {
     if (user.type == 'root') return true;
-    let mid = entityNameToId[entityName];
+    let mid = metaIndex["/"+path].id;
     if (!mid) {
-        console.log("---hasRight:no find mid:" + entityName);
+        console.log("---hasRight:no find mid:" + path);
         return false;
     }
     console.log("---mid:" + mid);
@@ -65,14 +64,14 @@ async function doRequest(ctx, next) {
     console.log("--doRequest:pageAdmin：" + path);
     let metaData = moduleMap["/" + path];
     if (!hasRight(ctx.session.user, path, actionName)) {
-        console.log("noright--" + entityName + ":" + actionName);
+        console.log("noright--" + path + ":" + actionName);
         throw new ApiError(ApiErrorNames.NORIGHT, actionName);
     }
 
     console.log("--doRequest:1");
     if (metaData) {
-        console.log("findServer:","/" + path+'_server')
-        let serverMetaData = metaIndexServer["/" + path+'_server'];
+        console.log("findServer:","/" + path)
+        let serverMetaData = metaIndexServer["/" + path];
         if(serverMetaData) {
             console.log("findServerRes:",serverMetaData)
             metaData.serverMeta=serverMetaData
@@ -85,11 +84,9 @@ async function doRequest(ctx, next) {
         let result = await exec(entityName, actionName, metaData, ctx);
         console.log("--doRequest:3" + entityName + ",result=" + JSON.stringify(result));
         if (!result) {
-            throw new ApiError(ApiErrorNames.LOGIN_FAIL);
+            throw new ApiError(ApiErrorNames.UNKNOW_ERROR);
         }
-        /*        } catch (e) {
-                    throw e;
-                }*/
+
     } else {
 
         throw new ApiError(ApiErrorNames.ENTITY_NOFIND, path);
