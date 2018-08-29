@@ -1,6 +1,0 @@
-#!/usr/bin/env node
-
-require('babel-register');
-var current_path = process.cwd();
-
-require(current_path + '/bin/Main')

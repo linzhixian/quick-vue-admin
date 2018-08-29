@@ -46,6 +46,8 @@ var initLogPath = function() {
 
 initLogPath();
 
+/**初始化meta/index.js*/
+
 /**
  * Get port from environment and store in Express.
  */

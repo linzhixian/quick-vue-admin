@@ -1,14 +1,22 @@
+let metaFiles=require("./metaFiles")
 let map = {};
 
-load("company", require("./company"));
-load("sys",require("./sys"));
-load("example", require("./example"));
+/*--start--*/
+for(let one of Object.keys(metaFiles)) {
+   load(one,metaFiles[one])
+}
+
+/*load("./company/Employee")
+load("./example/Input")
+load("./example/SetThemeColor")
+load("./example/Tree")
+load("./sys/Role")
+load("./sys/User")*/
+/*--end--*/
 
 
-function load(path, modules) {
-    for (let key of Object.keys(modules)) {
-        let modu=modules[key]
-        modu.columnsMap = {};
+function load(path,modu) {    
+     modu.columnsMap = {};
         modu.subPermissions=[]
         if (modu.columnsDef) {
             for (let one of modu.columnsDef) {
@@ -25,8 +33,9 @@ function load(path, modules) {
         })
        }
 
-        map["/" + path + "/" + key] = modu;        
-        console.log("loaded:" + "/" + path + "/" + key);
-    }
+      map[path ] = modu;        
+      console.log("loaded:" +  path);
+
 }
+
 module.exports = map; 

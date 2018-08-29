@@ -15,29 +15,24 @@
  - [讨论组](https://gitter.im/quick-vue-admin/discuss)
  
 ## 依赖
-- nodejs &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(需要单独安装)
-- koa 2.0.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(项目依赖模块)
-- Element UI 2.x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(项目依赖模块)
-- MongoDB 3.x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(需要单独安装)
+- nodejs(需要单独安装)
+- koa 2.0.0 项目依赖模块)
+- Element UI 2.x (项目依赖模块)
+- MongoDB 3.x(需要单独安装)
 
 ## 功能
 ```
 - 登录 / 注销
-
-
 - CRUD(增、删、改、查)
   - 通过编写一个元配置文件即可自动生成完整的：增、删、改、查、翻页 功能
   - 自动更新、保存数据到MongoDB
   - 自动创建索引到MongoDB
-
 - 数据关联
-
 - 权限验证
   - 菜单权限控制
   - 基于用户+角色的权限管理
   - 
 - 支持自定义组件
-
 - 错误页面  
   - 404
 ```

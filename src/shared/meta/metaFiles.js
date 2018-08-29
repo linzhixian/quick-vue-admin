@@ -1,0 +1,9 @@
+module.exports={
+'/company/Department':require('./company/Department'),
+'/company/Employee':require('./company/Employee'),
+'/example/Input':require('./example/Input'),
+'/example/SetThemeColor':require('./example/SetThemeColor'),
+'/example/Tree':require('./example/Tree'),
+'/sys/Role':require('./sys/Role'),
+'/sys/User':require('./sys/User'),
+}

@@ -4,21 +4,22 @@
 
 English | [简体中文](./README.zh-CN.md)
 
-# 介绍
+# Introduction
 
-quick-vue-admi是一个开箱即用的后台集成解决方案，它基于[Vue](https://cn.vuejs.org/)、[Element](http://element-cn.eleme.io)和[MongoDB](https://www.mongodb.com/)，开创性地t推出基于配置的开发解决方案，帮你最快速地搭建企业级后台产品.
+quick-vue-admin is a front-end management background integration solution，base on [Vue](https://cn.vuejs.org/)、[Element](http://element-cn.eleme.io)和[MongoDB](https://www.mongodb.com/)。
+ Least programming，Auto dbref，out of the box。
 
- - [文档](https://linzhixian.github.io/quick-vue-admin-document)
+ - [Document](https://linzhixian.github.io/quick-vue-admin-document)
   
- - [讨论组](https://gitter.im/quick-vue-admin/discuss)
+ - [Discuss](https://gitter.im/quick-vue-admin/discuss)
 
-## 依赖
+## Dependencies
 - nodejs &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(need stand alone install)
 - koa 2.0.0  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(include)
 - Element UI 2.x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(include)
 - MongoDB 3.x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(need stand alone install)
 
-## 特性
+## Features
 ```
 - Login / Logout
 
@@ -63,6 +64,12 @@ npm run dev
 # Run for production environment
 npm run pm2
 ```
+## contact
+   -  Email:<fly_go@hotmail.com>
+   - Wechat:flygobaby
+   
+  ![](https://linzhixian.github.io/quick-vue-admin-document/wechat.jpg)
+
 ## Changelog
   Detailed changes for each release are documented in the [release notes](https://github.com/linzhixian/quick-vue-admin/releases).
 
