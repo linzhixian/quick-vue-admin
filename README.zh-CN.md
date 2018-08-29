@@ -8,10 +8,11 @@
 # 简介
 
 开箱即用的基于配置的后台管理解决方案，最少的编写代码，通过配置文件即可实现：增，删，改，查，翻页 的功能。
-它基于 [vue](https://github.com/vuejs/vue) 和 [element](https://github.com/ElemeFE/element)和MongoDB。它使用了最新的前端技术栈，动态路由，权限验证，提炼了典型的业务模型，提供了丰富的功能组件，它可以帮助你快速搭建企业级后台产品。
+它基于 [vue](https://github.com/vuejs/vue) 和 [element](https://github.com/ElemeFE/element)和[MongoDB](https://www.mongodb.com/)。它使用了最新的前端技术栈，动态路由，权限验证，提炼了典型的业务模型，提供了丰富的功能组件，它可以帮助你快速搭建企业级后台产品。
 
-# 在线演示:
- https://linzhixian.github.io/element-vue-admin
+ - [文档](https://linzhixian.github.io/quick-vue-admin-document)
+  
+ - [讨论组](https://gitter.im/quick-vue-admin/discuss)
  
 ## 依赖
 - nodejs &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(需要单独安装)
@@ -100,4 +101,4 @@ If you find this project useful, you can buy author a glass of juice
 
 [MIT](https://github.com/linzhixian/quick-vue-admin/blob/master/LICENSE)
 
-Copyright (c) 2018-present ZhiXianLin
+Copyright (c) 2018-present ZhiXian Lin
