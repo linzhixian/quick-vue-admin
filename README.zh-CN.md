@@ -3,7 +3,7 @@
   <h1>quick-vue-admin</h1>
 </p>
 
-简体中文 | [English](./README.md)
+简体中文 | [English](./README.zh-CN.md)
 
 # 简介
 
@@ -79,6 +79,19 @@ npm run dev
 #运行在生产环境下
 npm run pm2
 ```
+## 联系
+   -  Email:<fly_go@hotmail.com>
+   - 微信:![](https://linzhixian.github.io/quick-vue-admin-document/wechat.jpg)
+## Changelog
+  Detailed changes for each release are documented in the [release notes](https://github.com/linzhixian/quick-vue-admin/releases).
+
+## Donate
+
+If you find this project useful, you can buy author a glass of juice
+
+
+![](https://linzhixian.github.io/quick-vue-admin-document/wechatAndAlipay.jpg)
+
 
 ## License
 
