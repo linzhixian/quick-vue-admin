@@ -82,7 +82,8 @@ npm run pm2
 ## 联系
    -  Email:<fly_go@hotmail.com>
    - 微信:flygobaby
-   ![](https://linzhixian.github.io/quick-vue-admin-document/wechat.jpg)
+   
+  ![](https://linzhixian.github.io/quick-vue-admin-document/wechat.jpg)
 
 ## Changelog
   Detailed changes for each release are documented in the [release notes](https://github.com/linzhixian/quick-vue-admin/releases).
