@@ -1,6 +1,7 @@
 module.exports={
 '/company/Department':require('./company/Department'),
 '/company/Employee':require('./company/Employee'),
+'/example/index':require('./example/index'),
 '/example/Input':require('./example/Input'),
 '/example/SetThemeColor':require('./example/SetThemeColor'),
 '/example/Tree':require('./example/Tree'),

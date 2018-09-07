@@ -1,7 +1,6 @@
 const Koa = require('koa');
 const app = new Koa();
 
-const co = require('co');
 const convert = require('koa-convert');
 const router = require('koa-router')();
 const json = require('koa-json');
@@ -26,8 +25,6 @@ const config = require("./../../config/server")
 const mongoDb = require('./db/MongoDb');
 const services = require('./services');
 
-
-
 const response_formatter = require('./middlewares/response_formatter');
 const request_checkNeedParams = require('./middlewares/request_checkNeedParams');
 const apiRequestLog = require('./middlewares/ApiRequestLog');
@@ -35,9 +32,7 @@ const encrypt = require('./middlewares/encrypt');
 
 app.keys = ['DLIJOxxx9fdf0IDosddf'];
 
-
-
-const CONFIG = {
+const SESSION_CONFIG = {
     key: 'mars:sess',
     /** (string) cookie key (default is koa:sess) */
     maxAge: 86400000,
@@ -50,12 +45,7 @@ const CONFIG = {
     /** (boolean) signed or not (default true) */
 };
 
-
-
-
-
-exports.init = async function() {
-        console.log("---------init")
+exports.init = async function() {        
         if (process.env.NODE_ENV == 'development') {
             var koaWebpack = require('koa-webpack');
             const config = require('../../build/webpack.config.js');
@@ -65,16 +55,12 @@ exports.init = async function() {
                 });
         }
 
-        app.use(session(CONFIG, app));
+        app.use(session(SESSION_CONFIG, app));
 
         app.use(koaBody({ multipart: true }));
 
         // middlewares
         //app.use(convert(bodyparser));
-
-
-
-
         //美化输出的json格式
         app.use(convert(json()));        
         let db=await mongoDb.connect(config.mongodb)        

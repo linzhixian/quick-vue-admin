@@ -54,15 +54,9 @@ router.beforeEach((to, from, next) => {
 router.onError(function(err){
     console.err(err)
 })
-//router.afterEach(transition => {
-//NProgress.done();
-//});
 
 new Vue({
-    //el: "#app",
-    //template: "<App/>",
     router,
-    store,
-    //components: { App }
+    store,    
     render: h => h(App)
 }).$mount("#app")

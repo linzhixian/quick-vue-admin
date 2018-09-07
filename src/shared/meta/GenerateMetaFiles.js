@@ -19,8 +19,7 @@ module.exports=async function() {
 				let p=f.replace(__dirname,"").replace(/\\/g, "/")
 				paths.push(p.substring(0,p.length-3))
 			}
-	    }
-	    console.log(paths)	    
+	    }	   
 	    let content="module.exports={"
 	    for(let one of paths) {
 	    	content=content+"\n'"+one+"':"+"require('."+one+"'),"
