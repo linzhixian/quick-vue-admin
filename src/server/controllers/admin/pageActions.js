@@ -395,10 +395,10 @@ let actionMap = {
             });
         }
 
-        async function findRecords(db, entityName, pageSize, page, filter, sort, ctx) {            
+        async function findRecords(db, entityName, pageSize, page, filter0, sort, ctx) {
                 //conditions, callback, projects, sort, limit,skip
-                let { filter2 } = ctx.request.body;
-                let conditions = toFilterCondition(filter2, serverHook, metaData, ctx);
+                let { filter } = ctx.request.body;
+                let conditions = toFilterCondition(filter, serverHook, metaData, ctx);
                 let limit = pageSize;
                 let skip = (page - 1) * pageSize;
                 console.log("serverHook:" + serverHook);
