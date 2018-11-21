@@ -1,0 +1,22 @@
+{
+	"add":"Add",
+	"modify":"Modify",
+	"delete":"Delete",
+	"cancel":"cancel",
+	"submit":"Submit",	
+	"submitSuccess":"Submit Success",
+	"submitFail":"Submit fail:{msg}",
+	"uploadFile_illegalPrompt":"Illegal file,only '{fileType}' file",
+	"inputPrompt":"Enter {label}",
+    "deleteConfirm":"Are you sure you want to delete selected records?",
+    "prompt":"Prompt",
+    "deleteSuccess":"Delete success",
+    "deleteFail":"Delete fail:{msg}",
+
+       "meta":{
+    	"role":{
+    		"roleName":"Role Name",
+    		"memo":"Memo"
+    	}
+    }
+}

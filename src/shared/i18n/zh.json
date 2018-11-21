@@ -1,0 +1,23 @@
+{
+	"add":"增加",
+	"modify":"编辑",
+	"delete":"删除",
+	"cancel":"取消",
+    "submit":"提交",	
+	"submitSuccess":"提交成功",
+	"submitFail":"提交失败:{msg}",
+	"uploadFile_illegalPrompt":"文件非法，只能是:'{fileType}'文件'",
+    "inputPrompt":"请输入{label}",
+    "deleteConfirm":"确认删除选中记录吗？",
+    "prompt":"提示",
+    "deleteSuccess":"删除成功",
+    "deleteFail":"删除失败:{msg}",
+
+    "meta":{
+    	"role":{
+    		"roleName":"角色名",
+    		"memo":"备注",
+    		"permission":"权限"
+    	}
+    }
+}
