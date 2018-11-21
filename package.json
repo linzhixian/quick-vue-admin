@@ -77,8 +77,9 @@
     "url-loader": "^0.5.9",
     "uuid": "^3.0.1",
     "vue": "2.5.16",
+    "vue-i18n": "^8.2.1",
     "vue-router": "^2.3.0",
-    "vuex": "^2.0.0-rc.6",
+    "vuex": "^2.0.0-rc.6",    
     "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {

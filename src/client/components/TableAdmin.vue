@@ -43,7 +43,7 @@
         </el-table>
         <!--工具条-->
         <el-col :span="24" class="toolbar">
-            <el-button v-if="init.showRemove && checkPermission('remove')" type="danger" @click="batchRemove" :disabled="this.sels.length===0">删除</el-button>
+            <el-button v-if="init.showRemove && checkPermission('remove')" type="danger" @click="batchRemove" :disabled="this.sels.length===0">{{$t('delete') }}</el-button>
             <el-pagination v-if="init.showPagination" layout="total, sizes,prev, pager, next" @current-change="handleCurrentChange" :page-size="pageSize"
              @size-change="handlePageSizeChange"
              :page-sizes="[10,20,50,70,100, 200, 300, 400]"
@@ -204,11 +204,13 @@ export default {
                     }
                     if(elem.download){
                         elem.downloadUrl="/file/download"+this.init.path+"?prop="+elem.prop
-                　　}
+                　　}                 
+                  if(elem.label.startsWith("{") && elem.label.endsWith("}")) {                                          
+                     elem.label=this.$t("meta."+this.init.entityName+"."+elem.label.substring(1,elem.label.length-1))
+                  }
                 } 
 
-            }
-            console.log("----defs",defs)
+            }            
             return defs;
         },
         callListPage(params) { return this.ajaxListPage(params, this.modulePath); },
@@ -285,7 +287,7 @@ export default {
         //批量删除
         batchRemove: function() {
             var ids = this.sels.map(item => item._id);
-            this.$confirm('确认删除选中记录吗？', '提示', {
+            this.$confirm($t('deleteConfirm'), $t('prompt'), {
                 type: 'warning'
             }).then(() => {
                 this.listLoading = true;                
@@ -295,12 +297,12 @@ export default {
                     if (res.data.status.code == "0") {
                         //NProgress.done();
                         this.$message({
-                            message: '删除成功',
+                            message: $t('deleteSuccess'),
                             type: 'success'
-                        });
+                         });
                     } else {
                         this.$message({
-                            message: '删除失败:' + res.data.status.msg,
+                            message:$t('deleteFail',{msg:res.data.status.msg}) ,
                             type: 'error'
                         });
                     }

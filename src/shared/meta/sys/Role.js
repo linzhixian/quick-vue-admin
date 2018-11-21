@@ -33,7 +33,7 @@ let methods = {
     },
     onShowEdit: function(addForm, vum) {
         let right = addForm.right;
-        if (!right) reurn
+        if (!right) return
         if (!vum.$refs.right) return
         let ids = Object.keys(right);            
         vum.$refs.right[0].setCheckedKeys(ids);
@@ -46,10 +46,7 @@ let methods = {
                     document.getElementById('p' + id + 'remove').checked = (actions.remove==1)
                   }                 
                 }
-        },200)
-            
-
-
+        },200)        
         
     },
     onShowAdd: function(addForm, tableAdmin) {
@@ -107,7 +104,7 @@ function loadTreeData() {
 */
 let columnsDef = [{
         prop: 'name',
-        label: '角色名',
+        label: '{roleName}',
         width: 250,
         input: { type: 'text', rule: 'required' },        
         filter: true,
@@ -115,13 +112,13 @@ let columnsDef = [{
     },
     {
         prop: 'memo',
-        label: '描述',
+        label: '{memo}',
         width: 200,
         input: 'text'
     },
     {
         prop: 'right',
-        label: '权限',
+        label: '{permission}',
         width: 200,
         input: { type: 'tree',expandAll:true, nodeKey:'id',renderContent:methods.renderContent, props:{ label: 'name', children: 'children' },data: loadTreeData(),checkChange:methods.checkChange },
         formatter: methods.formatRight

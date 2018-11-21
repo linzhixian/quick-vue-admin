@@ -66,11 +66,11 @@
                     :default-value="editColumnDefs[oneItem].input.defaultValue"
                     >
                   </el-time-picker>                                            
-                </el-form-item>
+                </el-form-item> 
             </el-form>
             <div slot="footer" class="dialog-footer">
-                <el-button  v-on:click="cancel">取消</el-button>
-                <el-button type="primary" @click.native="addSubmit" >提交</el-button>
+                <el-button  v-on:click="cancel">{{$t('cancel') }}</el-button>
+                <el-button type="primary" @click.native="addSubmit" >{{$t('submit') }}</el-button>
             </div>        
     </section>
 </template>
@@ -82,7 +82,7 @@ import * as  pathUtil  from 'path';
 import Vue from "vue";
 
  export default {
-    props: ['columnsDef','api'],
+    props: ['entityName','columnsDef','api'],
      
     data() {
       return {
@@ -134,7 +134,7 @@ import Vue from "vue";
             //console.log("extname",extname)
             let colDef=this.findColumnDef(propName)
             if(colDef && colDef.input&& colDef.input.ext && "."+colDef.input.ext!=extname) {
-              this.$message.error('文件非法，只能是:'+colDef.input.ext+'文件');
+              this.$message.error( this.$t('uploadFile_illegalPrompt',{fileType:colDef.input.ext}));
 
               return;
             }
@@ -162,6 +162,7 @@ import Vue from "vue";
             let promises=[];
            // let theAddForm={};//Vue.set(_this.addForm,data[i]._id,{})
             let rules = {};
+
             for (let elem of columnDefs.values()) {        
                 if (elem &&　elem.input) {
                   if(isEdit &&  elem.edit==false) continue;
@@ -169,7 +170,7 @@ import Vue from "vue";
                   if(elem.input.rule) {
                     rules[elem.prop]=[];
                     if(elem.input.rule=='required') {
-                      rules[elem.prop].push({ required: true, message: '请输入' + elem.label, trigger: 'blur' });
+                      rules[elem.prop].push({ required: true, message:this.$t("inputPrompt",{label:elem.label}), trigger: 'blur' });
                     } else {// 
                      // console.log("push rule",elem.input.rule)
                       let valid=(rule,value,cb)=> {
@@ -178,6 +179,8 @@ import Vue from "vue";
                       rules[elem.prop].push({ validator: valid, trigger: 'blur' });   
                     }                   
                   }
+                  //startsWith(), endsWith()
+  
                   Vue.set(this.editColumnDefs,elem.prop,elem)
                   this.editColumns.push(elem.prop);
                       //console.log("-------------convertFormRule:1:"+JSON.stringify(elem));

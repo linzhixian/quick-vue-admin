@@ -7,7 +7,7 @@ submitCheck<!--核心组件:功能区-->
          <el-col :span="3"> 
              <el-form :inline="true" >
                 <el-form-item v-if="showAdd &&  checkPermission('add')">
-                    <el-button type="primary" size="medium" @click="handleAdd">新增</el-button>
+                    <el-button type="primary" size="medium" @click="handleAdd" >{{$t('add') }}</el-button>
                 </el-form-item>                                
             </el-form>
             </el-col>
@@ -18,7 +18,7 @@ submitCheck<!--核心组件:功能区-->
             <!--新增和编辑界面-->
         <el-dialog :title="dialogTitle"  :visible.sync="addFormVisible" :close-on-click-modal="false" :before-close="handleClose" v-on:open="onDialogLoaded">
            <!-- <edit-form ></edit-form> -->
-            <component :is="currentEditForm" :columnsDef="value.columnsDef" :api="api" ref="editform"  v-on:cancel="addFormVisible=false"  v-on:submit="formSubmit" v-on:created="onDialogLoaded"></component>
+            <component :is="currentEditForm" :entityName="value.entityName" :columnsDef="value.columnsDef" :api="api" ref="editform"  v-on:cancel="addFormVisible=false"  v-on:submit="formSubmit" v-on:created="onDialogLoaded"></component>
         </el-dialog>
 
 
@@ -110,7 +110,7 @@ export default {
        //显示新增界面
       handleAdd: function() {
             console.log("---handleAdd-----------");
-            this.dialogTitle = '新增';
+            this.dialogTitle = this.$t('add');
             this.dialogSubmitCall = this.callAdd;
             this.addFormVisible = true;
             this.dialogType='add'  
@@ -118,7 +118,7 @@ export default {
         //显示编辑界面
         handleEdit: function(row) {            
                 this.currentRow=row                 
-                this.dialogTitle = '编辑';
+                this.dialogTitle = this.$t('modify');
                 this.addFormVisible = true;
                  this.dialogType='edit'                        
                 this.dialogSubmitCall = this.callEdit;              
@@ -141,7 +141,7 @@ export default {
                             loadingInstance.close();         
                             if (res.data.status.code == "0") {
                                 this.$message({
-                                    message: '提交成功',
+                                    message: this.$t('submitSuccess'),
                                     type: 'success'
                                 });
                                 if(this.$refs.editform) {
@@ -157,7 +157,7 @@ export default {
                               //Notification
                                 if(res.data.status.msg.length<50) {
                                  this.$message({
-                                    message: '提交失败：' + res.data.status.msg,
+                                    message: this.$t('submitFail',{msg:res.data.status.msg}),
                                     type: 'error',
                                     showClose: true,
                                     duration:0
