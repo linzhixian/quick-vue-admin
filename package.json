@@ -5,10 +5,10 @@
   "author": "your name",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon bin/Run --ignore src/shared/meta/metaFiles.js",
-    "pm2": "cross-env NODE_ENV=product pm2 start bin/Run --name quickVueAdmin -e logs/error.log -o logs/access.log",
+    "dev": "cross-env NODE_ENV=development nodemon bin/Run.js --ignore src/shared/meta/metaFiles.js",
+    "pm2": "cross-env NODE_ENV=product pm2 start bin/Run.js --name quickVueAdmin -e logs/error.log -o logs/access.log",
     "stop": "pm2 stop tcAdAdmin",
-    "test": "cross-env NODE_ENV=test pm2 start bin/Run --name quickVueAdmin -i 1 -e logs/error.log -o logs/access.log",
+    "test": "cross-env NODE_ENV=test pm2 start bin/Run.js --name quickVueAdmin -i 1 -e logs/error.log -o logs/access.log",
     "restart": "pm2 restart quickVueAdmin",
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.config.js --progress ",
     "list": "pm2 list"
