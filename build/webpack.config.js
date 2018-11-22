@@ -15,7 +15,7 @@ module.exports = {
     mode: "development",
     entry: ['./src/client/main.js'],
     output: {
-        path: path.resolve(__dirname, './www/dist/'),
+        path: path.resolve(__dirname, './../www/dist/'),
         publicPath: '/dist/',
         filename: 'build.js'
     },
