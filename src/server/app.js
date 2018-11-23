@@ -73,7 +73,7 @@ exports.init = async function() {
          
         app.use(convert(logger()));
 
-        app.use(require('koa-static')(__dirname + '/../../www'));
+        app.use(require('koa-static')(__dirname + '/../../www',{maxage :config.httpResponse.maxAge}));
 
 
         // logger
