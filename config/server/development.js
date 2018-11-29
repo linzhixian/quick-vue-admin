@@ -14,5 +14,5 @@ module.exports = {
     dataDir: "/data",
     dbKeepDays:10,
     logKeepDays:10,
-     httpResponse:{maxAge:86400000}
+     httpResponse:{maxAge:0}
 }

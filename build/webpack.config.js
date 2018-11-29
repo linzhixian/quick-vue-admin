@@ -4,22 +4,23 @@ var utils = require('./utils.js')
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 var nodeExternals = require('webpack-node-externals');
+var HtmlwebpackPlugin = require('html-webpack-plugin');
 
 var isProduction = process.env.NODE_ENV === 'product'
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
 }
-
+var Version = new Date().getTime();
 module.exports = {
     mode: "development",
     entry: ['./src/client/main.js'],
     output: {
         path: path.resolve(__dirname, './../www/dist/'),
         publicPath: '/dist/',
-        filename: 'build.js'
+        filename: 'build.'+Version+'.js'
     },
-    externals:[/config\/server/,/src\/server/], //过滤掉服务端的代码打入到bundle
+    externals:[/config\/server/,/src\/server/], //过滤掉服务端的代码打入到bundle 
     resolve: {
         extensions: ['.js', '.vue', '.json'],
         alias: {
@@ -96,7 +97,11 @@ module.exports = {
         hints: false
     },    
     plugins: [
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new HtmlwebpackPlugin({     
+      template:'./build/index.html',
+      filename:'../index.html'
+    })
     ]
 }
 
